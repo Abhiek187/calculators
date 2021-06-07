@@ -161,7 +161,7 @@ struct ContentView: View {
                 Spacer()
                 
                 Button(action: {}) {
-                    Text("(")
+                    Text(")")
                         .round()
                 }
                 .round(color: Color.black)
