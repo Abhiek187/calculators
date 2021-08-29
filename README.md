@@ -20,7 +20,7 @@ There are two iOS apps to check out. `Calculator-Storyboard` uses storyboards to
 
 ### Android
 
-Like iOS, two Android apps were created. `Calculator-View` uses the View library to create the UI and `Calculator-Compose` uses Jetpack Compose to create the UI. Open each respective folder in Android Studio and run any of the necessary Gradle builds to run each app. (Note for `Calculator-Compose`, make sure you have Android Studio Arctic Fox or later installed.) Unit tests are found in the `<project-name>/app/src/test/*` directory. Instrumented (UI) tests are found in the `<project-name>/app/src/androidTest/*` directory.
+Like iOS, two Android apps were created. `Calculator-View` uses the View system to create the UI and `Calculator-Compose` uses Jetpack Compose to create the UI. Open each respective folder in Android Studio and run any of the necessary Gradle builds to run each app. (Note for `Calculator-Compose`, make sure you have Android Studio Arctic Fox or later installed.) Unit tests are found in the `<project-name>/app/src/test/*` directory. Instrumented (UI) tests are found in the `<project-name>/app/src/androidTest/*` directory.
 
 ### React Native
 
