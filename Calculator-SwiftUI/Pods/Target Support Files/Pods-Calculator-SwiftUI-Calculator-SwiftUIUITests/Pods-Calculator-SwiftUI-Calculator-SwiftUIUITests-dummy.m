@@ -1,5 +1,0 @@
-#import <Foundation/Foundation.h>
-@interface PodsDummy_Pods_Calculator_SwiftUI_Calculator_SwiftUIUITests : NSObject
-@end
-@implementation PodsDummy_Pods_Calculator_SwiftUI_Calculator_SwiftUIUITests
-@end
