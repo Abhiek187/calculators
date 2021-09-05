@@ -1,11 +1,17 @@
 package com.example.calculator
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class MainActivityUnitTest {
     private lateinit var sut: MainActivity // system under test
+
+    // Fixes error: Method getMainLooper in android.os.Looper not mocked
+    @get:Rule
+    val taskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun init() {
@@ -37,8 +43,8 @@ class MainActivityUnitTest {
         sut.addNumber('1')
         sut.addOperator('%')
 
-        assertEquals(sut.numbers.peek(), 21.0, Math.ulp(1.0))
-        assertEquals(sut.operators.peek(), '%')
+        assertEquals(sut.num1, 21.0, Math.ulp(1.0))
+        assertEquals(sut.op, '%')
         assertTrue(sut.numStr.isEmpty())
     }
 
@@ -46,8 +52,8 @@ class MainActivityUnitTest {
     fun addOperator_Invalid() {
         sut.addOperator('+')
 
-        assertTrue(sut.numbers.empty())
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar()) // == \u0000 = \0
         assertTrue(sut.numStr.isEmpty())
     }
 
@@ -84,8 +90,8 @@ class MainActivityUnitTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.numbers.peek(), 5.0, Math.ulp(1.0))
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 5.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
         assertEquals(sut.numStr, "5.0")
     }
 
@@ -96,8 +102,8 @@ class MainActivityUnitTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.numbers.peek(), -1.0, Math.ulp(1.0))
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, -1.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
         assertEquals(sut.numStr, "-1.0")
     }
 
@@ -108,8 +114,8 @@ class MainActivityUnitTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.numbers.peek(), 6.0, Math.ulp(1.0))
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 6.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
         assertEquals(sut.numStr, "6.0")
     }
 
@@ -121,8 +127,8 @@ class MainActivityUnitTest {
         sut.evaluate()
         val answer = 2/3.0
 
-        assertEquals(sut.numbers.peek(), answer, Math.ulp(1.0))
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, answer, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
         assertEquals(sut.numStr, answer.toString())
     }
 
@@ -133,8 +139,8 @@ class MainActivityUnitTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.numbers.peek(), 2.0, Math.ulp(1.0))
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 2.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
         assertEquals(sut.numStr, "2.0")
     }
 
@@ -145,8 +151,8 @@ class MainActivityUnitTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.numbers.peek(), 8.0, Math.ulp(1.0))
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 8.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
         assertEquals(sut.numStr, "8.0")
     }
 
@@ -154,8 +160,8 @@ class MainActivityUnitTest {
     fun evaluate_MissingFirstNum() {
         sut.evaluate()
 
-        assertTrue(sut.numbers.empty())
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
         assertTrue(sut.numStr.isEmpty())
     }
 
@@ -164,9 +170,9 @@ class MainActivityUnitTest {
         sut.addNumber('2')
         sut.evaluate()
 
-        assertTrue(sut.numbers.empty())
-        assertTrue(sut.operators.empty())
-        assertEquals(sut.numStr, "2")
+        assertEquals(sut.num1, 2.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
+        assertEquals(sut.numStr, "2.0")
     }
 
     @Test
@@ -175,8 +181,8 @@ class MainActivityUnitTest {
         sut.addOperator('^')
         sut.evaluate()
 
-        assertEquals(sut.numbers.peek(), 2.0, Math.ulp(1.0))
-        assertEquals(sut.operators.peek(), '^')
+        assertEquals(sut.num1, 2.0, Math.ulp(1.0))
+        assertEquals(sut.op, '^')
         assertTrue(sut.numStr.isEmpty())
     }
 
@@ -185,8 +191,8 @@ class MainActivityUnitTest {
         sut.clearOutput()
 
         assertTrue(sut.numStr.isEmpty())
-        assertTrue(sut.numbers.empty())
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
     }
 
     @Test
@@ -195,8 +201,8 @@ class MainActivityUnitTest {
         sut.clearOutput()
 
         assertTrue(sut.numStr.isEmpty())
-        assertTrue(sut.numbers.empty())
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
     }
 
     @Test
@@ -206,8 +212,8 @@ class MainActivityUnitTest {
         sut.clearOutput()
 
         assertTrue(sut.numStr.isEmpty())
-        assertTrue(sut.numbers.empty())
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
     }
 
     @Test
@@ -218,8 +224,8 @@ class MainActivityUnitTest {
         sut.clearOutput()
 
         assertTrue(sut.numStr.isEmpty())
-        assertTrue(sut.numbers.empty())
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
     }
 
     @Test
@@ -231,7 +237,7 @@ class MainActivityUnitTest {
         sut.clearOutput()
 
         assertTrue(sut.numStr.isEmpty())
-        assertTrue(sut.numbers.empty())
-        assertTrue(sut.operators.empty())
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
     }
 }

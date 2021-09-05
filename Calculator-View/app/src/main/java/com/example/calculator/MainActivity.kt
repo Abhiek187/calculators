@@ -3,13 +3,12 @@ package com.example.calculator
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculator.databinding.ActivityMainBinding
-import java.util.*
+import kotlin.math.pow
 
 
 class MainActivity : AppCompatActivity() {
-    // Create a stack for the numbers and operators
-    val numbers = Stack<Double>()
-    val operators = Stack<Char>()
+    var num1 = 0.0
+    var op = '\u0000' // null character: \0
     var numStr = "" // string to build up a number
 
     private lateinit var binding: ActivityMainBinding
@@ -165,8 +164,8 @@ class MainActivity : AppCompatActivity() {
 
     fun clearOutput() {
         numStr = ""
-        numbers.removeAllElements()
-        operators.removeAllElements()
+        num1 = 0.0
+        op = '\u0000'
     }
 
     fun addNumber(key: Char) {
@@ -174,11 +173,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addOperator(key: Char) {
-        if (numStr.isEmpty()) return
-
-        numbers.push(numStr.toDouble())
-        operators.push(key)
-        numStr = ""
+        numStr.toDoubleOrNull()?.let { num ->
+            num1 = num
+            op = key
+            numStr = ""
+        }
     }
 
     fun invertNumber() {
@@ -190,21 +189,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun evaluate() {
-        if (numbers.empty() || numStr.isEmpty() || operators.empty()) return
+        numStr.toDoubleOrNull()?.let { num2 ->
+            val result = when (op) {
+                '+' -> num1 + num2
+                '-' -> num1 - num2
+                '*' -> num1 * num2
+                '/' -> num1 / num2
+                '%' -> num1 % num2
+                '^' -> num1.pow(num2)
+                else -> num2
+            }
 
-        val a = numbers.pop()
-        val b = numStr.toDouble()
-
-        val result = when (operators.pop()) {
-            '+' -> a + b
-            '-' -> a - b
-            '*' -> a * b
-            '/' -> a / b
-            '%' -> a % b
-            else -> Math.pow(a, b)
+            num1 = result
+            numStr = result.toString()
+            op = '\u0000'
         }
-
-        numbers.push(result)
-        numStr = result.toString()
     }
 }
