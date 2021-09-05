@@ -13,7 +13,8 @@ struct FillScreen: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: alignment)
-            .padding()
+            .padding(.horizontal)
+            .padding(.vertical, 1)
     }
 }
 
@@ -115,257 +116,262 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
-            Text(output)
-                .font(.largeTitle)
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
-                .modifier(FillScreen(alignment: .trailing))
+        GeometryReader { metrics in
+            VStack(spacing: 0) {
+                Text(output)
+                    .font(.largeTitle)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(width: metrics.size.width * 0.9, height: metrics.size.height * 0.1, alignment: .trailing)
+                    .padding()
                 
-            HStack {
-                Button(action: {
-                    addOperator(key: "^")
-                }) {
-                    Text("^")
-                        .round()
+                ScrollView {
+                    HStack {
+                        Button(action: {
+                            addOperator(key: "^")
+                        }) {
+                            Text("^")
+                                .round()
+                        }
+                        .round(color: Color.secondary)
+                        
+                        Spacer()
+                        
+                        Button(action: {}) {
+                            Text("π")
+                                .round()
+                        }
+                        .round(color: Color.secondary)
+                        .disabled(true)
+                        
+                        Spacer()
+                        
+                        Button(action: {}) {
+                            Text("ln")
+                                .round()
+                        }
+                        .round(color: Color.secondary)
+                        .disabled(true)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            clearOutput()
+                        }) {
+                            Text("clear")
+                                .round()
+                        }
+                        .round(color: Color.systemRed)
+                    }
+                    .modifier(FillScreen())
+                    
+                    HStack {
+                        Button(action: {}) {
+                            Text("(")
+                                .round()
+                        }
+                        .round(color: Color.secondary)
+                        .disabled(true)
+                        
+                        Spacer()
+                        
+                        Button(action: {}) {
+                            Text(")")
+                                .round()
+                        }
+                        .round(color: Color.secondary)
+                        .disabled(true)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addOperator(key: "%")
+                        }) {
+                            Text("%")
+                                .round()
+                        }
+                        .round(color: Color.systemGreen)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addOperator(key: "/")
+                        }) {
+                            Text("/")
+                                .round()
+                        }
+                        .round(color: Color.systemGreen)
+                    }
+                    .modifier(FillScreen())
+                    
+                    HStack {
+                        Button(action: {
+                            addNumber(key: "7")
+                        }) {
+                            Text("7")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addNumber(key: "8")
+                        }) {
+                            Text("8")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addNumber(key: "9")
+                        }) {
+                            Text("9")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addOperator(key: "*")
+                        }) {
+                            Text("*")
+                                .round()
+                        }
+                        .round(color: Color.systemGreen)
+                    }
+                    .modifier(FillScreen())
+                    
+                    HStack {
+                        Button(action: {
+                            addNumber(key: "4")
+                        }) {
+                            Text("4")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addNumber(key: "5")
+                        }) {
+                            Text("5")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addNumber(key: "6")
+                        }) {
+                            Text("6")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addOperator(key: "-")
+                        }) {
+                            Text("-")
+                                .round()
+                        }
+                        .round(color: Color.systemGreen)
+                    }
+                    .modifier(FillScreen())
+                    
+                    HStack {
+                        Button(action: {
+                            addNumber(key: "1")
+                        }) {
+                            Text("1")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addNumber(key: "2")
+                        }) {
+                            Text("2")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addNumber(key: "3")
+                        }) {
+                            Text("3")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addOperator(key: "+")
+                        }) {
+                            Text("+")
+                                .round()
+                        }
+                        .round(color: Color.systemGreen)
+                    }
+                    .modifier(FillScreen())
+                    
+                    HStack {
+                        Button(action: {
+                            addNumber(key: "0")
+                        }) {
+                            Text("0")
+                                .round()
+                        }
+                        .round(color: Color.systemOrange)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            addNumber(key: ".")
+                        }) {
+                            Text(".")
+                                .round()
+                        }
+                        .round(color: Color.secondary)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            invertNumber()
+                        }) {
+                            Text("(-)")
+                                .round()
+                        }
+                        .round(color: Color.secondary)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            evaluate()
+                        }) {
+                            Text("=")
+                                .round()
+                        }
+                        .round(color: Color.systemBlue)
+                    }
+                    .modifier(FillScreen())
                 }
-                .round(color: Color.secondary)
-                
-                Spacer()
-                
-                Button(action: {}) {
-                    Text("π")
-                        .round()
-                }
-                .round(color: Color.secondary)
-                .disabled(true)
-                
-                Spacer()
-                
-                Button(action: {}) {
-                    Text("ln")
-                        .round()
-                }
-                .round(color: Color.secondary)
-                .disabled(true)
-                
-                Spacer()
-                
-                Button(action: {
-                    clearOutput()
-                }) {
-                    Text("clear")
-                        .round()
-                }
-                .round(color: Color.systemRed)
+                .frame(minHeight: 0, maxHeight: .infinity)
             }
-            .modifier(FillScreen())
-            
-            HStack {
-                Button(action: {}) {
-                    Text("(")
-                        .round()
-                }
-                .round(color: Color.secondary)
-                .disabled(true)
-                
-                Spacer()
-                
-                Button(action: {}) {
-                    Text(")")
-                        .round()
-                }
-                .round(color: Color.secondary)
-                .disabled(true)
-                
-                Spacer()
-                
-                Button(action: {
-                    addOperator(key: "%")
-                }) {
-                    Text("%")
-                        .round()
-                }
-                .round(color: Color.systemGreen)
-                
-                Spacer()
-                
-                Button(action: {
-                    addOperator(key: "/")
-                }) {
-                    Text("/")
-                        .round()
-                }
-                .round(color: Color.systemGreen)
-            }
-            .modifier(FillScreen())
-            
-            HStack {
-                Button(action: {
-                    addNumber(key: "7")
-                }) {
-                    Text("7")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addNumber(key: "8")
-                }) {
-                    Text("8")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addNumber(key: "9")
-                }) {
-                    Text("9")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addOperator(key: "*")
-                }) {
-                    Text("*")
-                        .round()
-                }
-                .round(color: Color.systemGreen)
-            }
-            .modifier(FillScreen())
-            
-            HStack {
-                Button(action: {
-                    addNumber(key: "4")
-                }) {
-                    Text("4")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addNumber(key: "5")
-                }) {
-                    Text("5")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addNumber(key: "6")
-                }) {
-                    Text("6")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addOperator(key: "-")
-                }) {
-                    Text("-")
-                        .round()
-                }
-                .round(color: Color.systemGreen)
-            }
-            .modifier(FillScreen())
-            
-            HStack {
-                Button(action: {
-                    addNumber(key: "1")
-                }) {
-                    Text("1")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addNumber(key: "2")
-                }) {
-                    Text("2")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addNumber(key: "3")
-                }) {
-                    Text("3")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addOperator(key: "+")
-                }) {
-                    Text("+")
-                        .round()
-                }
-                .round(color: Color.systemGreen)
-            }
-            .modifier(FillScreen())
-            
-            HStack {
-                Button(action: {
-                    addNumber(key: "0")
-                }) {
-                    Text("0")
-                        .round()
-                }
-                .round(color: Color.systemOrange)
-                
-                Spacer()
-                
-                Button(action: {
-                    addNumber(key: ".")
-                }) {
-                    Text(".")
-                        .round()
-                }
-                .round(color: Color.secondary)
-                
-                Spacer()
-                
-                Button(action: {
-                    invertNumber()
-                }) {
-                    Text("(-)")
-                        .round()
-                }
-                .round(color: Color.secondary)
-                
-                Spacer()
-                
-                Button(action: {
-                    evaluate()
-                }) {
-                    Text("=")
-                        .round()
-                }
-                .round(color: Color.systemBlue)
-            }
-            .modifier(FillScreen())
+            .onAppear { self.didAppear?(self) }
         }
-        .modifier(FillScreen())
-        .onAppear { self.didAppear?(self) }
     }
 }
 
