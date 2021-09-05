@@ -16,7 +16,7 @@ These are simple calculator apps designed for all web and mobile devices using a
 There are two iOS apps to check out. `Calculator-Storyboard` uses storyboards to create the UI and `Calculator-SwiftUI` uses SwiftUI to create the UI. Both can be run using Xcode on a Mac.
 
 - **Storyboard:** Open `Calculator-Storyboard.xcodeproj` inside the `Calculator-Storyboard` directory. Unit tests are found in the `Calculator-StoryboardTests` directory. UI tests are found in the `Calculator-StoryboardUITests` directory.
-- **SwiftUI:** Open `Calculator-SwiftUI.xcworkspace` (**not .xcodeproj**) inside the `Calculator-SwiftUI` directory. (Note: SwiftUI only works with iOS 13+ or Xcode 11+.) If there are any dependency issues, run `pod install` to install the necessary dependencies. Unit tests are found in the `Calculator-SwiftUITests` directory and leverage the [View Inspector](https://github.com/nalexn/ViewInspector) library to set up all the tests. UI tests are found in the `Calculator-SwiftUIUITests` directory.
+- **SwiftUI:** Open `Calculator-SwiftUI.xcodeproj` inside the `Calculator-SwiftUI` directory. (Note: SwiftUI only works with iOS 13+ or Xcode 11+.) Unit tests are found in the `Calculator-SwiftUITests` directory and leverage the [View Inspector](https://github.com/nalexn/ViewInspector) library to set up all the tests. UI tests are found in the `Calculator-SwiftUIUITests` directory.
 
 ### Android
 
