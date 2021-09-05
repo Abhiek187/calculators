@@ -17,6 +17,16 @@ struct FillScreen: ViewModifier {
     }
 }
 
+extension Color {
+    // Colors that adapt to light and dark mode
+    static let label = Color(UIColor.label)
+    
+    static let systemBlue = Color(UIColor.systemBlue)
+    static let systemGreen = Color(UIColor.systemGreen)
+    static let systemOrange = Color(UIColor.systemOrange)
+    static let systemRed = Color(UIColor.systemRed)
+}
+
 extension Button {
     func round(color: Color) -> some View {
         self
@@ -28,10 +38,11 @@ extension Button {
 }
 
 extension Text {
+    // Fit text within a round button
     func round() -> some View {
         self
             .frame(width: 60, height: 60, alignment: .center)
-            .foregroundColor(.white)
+            .foregroundColor(.label)
             .contentShape(
                 RoundedRectangle(cornerRadius: 30)
             )
@@ -118,7 +129,7 @@ struct ContentView: View {
                     Text("^")
                         .round()
                 }
-                .round(color: Color.black)
+                .round(color: Color.secondary)
                 
                 Spacer()
                 
@@ -126,7 +137,7 @@ struct ContentView: View {
                     Text("π")
                         .round()
                 }
-                .round(color: Color.black)
+                .round(color: Color.secondary)
                 .disabled(true)
                 
                 Spacer()
@@ -135,7 +146,7 @@ struct ContentView: View {
                     Text("ln")
                         .round()
                 }
-                .round(color: Color.black)
+                .round(color: Color.secondary)
                 .disabled(true)
                 
                 Spacer()
@@ -146,7 +157,7 @@ struct ContentView: View {
                     Text("clear")
                         .round()
                 }
-                .round(color: Color.red)
+                .round(color: Color.systemRed)
             }
             .modifier(FillScreen())
             
@@ -155,7 +166,7 @@ struct ContentView: View {
                     Text("(")
                         .round()
                 }
-                .round(color: Color.black)
+                .round(color: Color.secondary)
                 .disabled(true)
                 
                 Spacer()
@@ -164,7 +175,7 @@ struct ContentView: View {
                     Text(")")
                         .round()
                 }
-                .round(color: Color.black)
+                .round(color: Color.secondary)
                 .disabled(true)
                 
                 Spacer()
@@ -175,7 +186,7 @@ struct ContentView: View {
                     Text("%")
                         .round()
                 }
-                .round(color: Color.green)
+                .round(color: Color.systemGreen)
                 
                 Spacer()
                 
@@ -185,7 +196,7 @@ struct ContentView: View {
                     Text("/")
                         .round()
                 }
-                .round(color: Color.green)
+                .round(color: Color.systemGreen)
             }
             .modifier(FillScreen())
             
@@ -196,7 +207,7 @@ struct ContentView: View {
                     Text("7")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -206,7 +217,7 @@ struct ContentView: View {
                     Text("8")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -216,7 +227,7 @@ struct ContentView: View {
                     Text("9")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -226,7 +237,7 @@ struct ContentView: View {
                     Text("*")
                         .round()
                 }
-                .round(color: Color.green)
+                .round(color: Color.systemGreen)
             }
             .modifier(FillScreen())
             
@@ -237,7 +248,7 @@ struct ContentView: View {
                     Text("4")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -247,7 +258,7 @@ struct ContentView: View {
                     Text("5")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -257,7 +268,7 @@ struct ContentView: View {
                     Text("6")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -267,7 +278,7 @@ struct ContentView: View {
                     Text("-")
                         .round()
                 }
-                .round(color: Color.green)
+                .round(color: Color.systemGreen)
             }
             .modifier(FillScreen())
             
@@ -278,7 +289,7 @@ struct ContentView: View {
                     Text("1")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -288,7 +299,7 @@ struct ContentView: View {
                     Text("2")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -298,7 +309,7 @@ struct ContentView: View {
                     Text("3")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -308,7 +319,7 @@ struct ContentView: View {
                     Text("+")
                         .round()
                 }
-                .round(color: Color.green)
+                .round(color: Color.systemGreen)
             }
             .modifier(FillScreen())
             
@@ -319,7 +330,7 @@ struct ContentView: View {
                     Text("0")
                         .round()
                 }
-                .round(color: Color.orange)
+                .round(color: Color.systemOrange)
                 
                 Spacer()
                 
@@ -329,7 +340,7 @@ struct ContentView: View {
                     Text(".")
                         .round()
                 }
-                .round(color: Color.black)
+                .round(color: Color.secondary)
                 
                 Spacer()
                 
@@ -339,7 +350,7 @@ struct ContentView: View {
                     Text("(-)")
                         .round()
                 }
-                .round(color: Color.black)
+                .round(color: Color.secondary)
                 
                 Spacer()
                 
@@ -349,7 +360,7 @@ struct ContentView: View {
                     Text("=")
                         .round()
                 }
-                .round(color: Color.blue)
+                .round(color: Color.systemBlue)
             }
             .modifier(FillScreen())
         }
@@ -360,6 +371,9 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group {
+            ContentView().preferredColorScheme(.light)
+            ContentView().preferredColorScheme(.dark)
+        }
     }
 }
