@@ -133,7 +133,7 @@ struct ContentView: View {
                             Text("^")
                                 .round()
                         }
-                        .round(color: Color.secondary)
+                        .round(color: .secondary)
                         
                         Spacer()
                         
@@ -141,7 +141,7 @@ struct ContentView: View {
                             Text("π")
                                 .round()
                         }
-                        .round(color: Color.secondary)
+                        .round(color: .secondary)
                         .disabled(true)
                         
                         Spacer()
@@ -150,7 +150,7 @@ struct ContentView: View {
                             Text("ln")
                                 .round()
                         }
-                        .round(color: Color.secondary)
+                        .round(color: .secondary)
                         .disabled(true)
                         
                         Spacer()
@@ -161,7 +161,7 @@ struct ContentView: View {
                             Text("clear")
                                 .round()
                         }
-                        .round(color: Color.systemRed)
+                        .round(color: .systemRed)
                     }
                     .modifier(FillScreen())
                     
@@ -170,7 +170,7 @@ struct ContentView: View {
                             Text("(")
                                 .round()
                         }
-                        .round(color: Color.secondary)
+                        .round(color: .secondary)
                         .disabled(true)
                         
                         Spacer()
@@ -179,7 +179,7 @@ struct ContentView: View {
                             Text(")")
                                 .round()
                         }
-                        .round(color: Color.secondary)
+                        .round(color: .secondary)
                         .disabled(true)
                         
                         Spacer()
@@ -190,7 +190,7 @@ struct ContentView: View {
                             Text("%")
                                 .round()
                         }
-                        .round(color: Color.systemGreen)
+                        .round(color: .systemGreen)
                         
                         Spacer()
                         
@@ -200,7 +200,7 @@ struct ContentView: View {
                             Text("/")
                                 .round()
                         }
-                        .round(color: Color.systemGreen)
+                        .round(color: .systemGreen)
                     }
                     .modifier(FillScreen())
                     
@@ -211,7 +211,7 @@ struct ContentView: View {
                             Text("7")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -221,7 +221,7 @@ struct ContentView: View {
                             Text("8")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -231,7 +231,7 @@ struct ContentView: View {
                             Text("9")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -241,7 +241,7 @@ struct ContentView: View {
                             Text("*")
                                 .round()
                         }
-                        .round(color: Color.systemGreen)
+                        .round(color: .systemGreen)
                     }
                     .modifier(FillScreen())
                     
@@ -252,7 +252,7 @@ struct ContentView: View {
                             Text("4")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -262,7 +262,7 @@ struct ContentView: View {
                             Text("5")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -272,7 +272,7 @@ struct ContentView: View {
                             Text("6")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -282,7 +282,7 @@ struct ContentView: View {
                             Text("-")
                                 .round()
                         }
-                        .round(color: Color.systemGreen)
+                        .round(color: .systemGreen)
                     }
                     .modifier(FillScreen())
                     
@@ -293,7 +293,7 @@ struct ContentView: View {
                             Text("1")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -303,7 +303,7 @@ struct ContentView: View {
                             Text("2")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -313,7 +313,7 @@ struct ContentView: View {
                             Text("3")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -323,7 +323,7 @@ struct ContentView: View {
                             Text("+")
                                 .round()
                         }
-                        .round(color: Color.systemGreen)
+                        .round(color: .systemGreen)
                     }
                     .modifier(FillScreen())
                     
@@ -334,7 +334,7 @@ struct ContentView: View {
                             Text("0")
                                 .round()
                         }
-                        .round(color: Color.systemOrange)
+                        .round(color: .systemOrange)
                         
                         Spacer()
                         
@@ -344,7 +344,7 @@ struct ContentView: View {
                             Text(".")
                                 .round()
                         }
-                        .round(color: Color.secondary)
+                        .round(color: .secondary)
                         
                         Spacer()
                         
@@ -354,7 +354,7 @@ struct ContentView: View {
                             Text("(-)")
                                 .round()
                         }
-                        .round(color: Color.secondary)
+                        .round(color: .secondary)
                         
                         Spacer()
                         
@@ -364,7 +364,7 @@ struct ContentView: View {
                             Text("=")
                                 .round()
                         }
-                        .round(color: Color.systemBlue)
+                        .round(color: .systemBlue)
                     }
                     .modifier(FillScreen())
                 }
