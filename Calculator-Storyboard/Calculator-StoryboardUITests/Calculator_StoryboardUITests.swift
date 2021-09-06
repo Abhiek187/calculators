@@ -29,13 +29,14 @@ class Calculator_StoryboardUITests: XCTestCase {
     }
     
     func testSimpleEquation() {
+        let labelOutput = app.staticTexts.firstMatch
         let button2 = app.buttons["2"]
         let buttonPlus = app.buttons["+"]
         let button3 = app.buttons["3"]
         let buttonEquals = app.buttons["="]
         
+        XCTAssertEqual(labelOutput.label, "0")
         button2.tap()
-        let labelOutput = app.staticTexts.firstMatch
         XCTAssertEqual(labelOutput.label, "2")
         buttonPlus.tap()
         XCTAssertEqual(labelOutput.label, "2 + ")
@@ -46,6 +47,7 @@ class Calculator_StoryboardUITests: XCTestCase {
     }
 
     func testComplexEquation() {
+        let labelOutput = app.staticTexts.firstMatch
         let buttonNegative = app.buttons["(-)"]
         let button0 = app.buttons["0"]
         let buttonDot = app.buttons["."]
@@ -56,9 +58,9 @@ class Calculator_StoryboardUITests: XCTestCase {
         let buttonDivide = app.buttons["/"]
         let button2 = app.buttons["2"]
         
+        XCTAssertEqual(labelOutput.label, "0")
         buttonNegative.tap()
-        let labelOutput = app.staticTexts.firstMatch
-        XCTAssertEqual(labelOutput.label, "-")
+        XCTAssertEqual(labelOutput.label, "-0")
         button0.tap()
         XCTAssertEqual(labelOutput.label, "-0")
         buttonDot.tap()

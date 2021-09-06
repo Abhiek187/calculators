@@ -50,18 +50,18 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertTrue(sut.numStr.isEmpty)
     }
     
-    func testAddOperator_Invalid() {
+    func testAddOperator_Empty() {
         sut.addOperator(key: "+")
 
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
-        XCTAssertTrue(sut.op.isEmpty)
+        XCTAssertEqual(sut.op, "+")
         XCTAssertTrue(sut.numStr.isEmpty)
     }
     
     func testInvertNumber_Empty() {
         sut.invertNumber()
 
-        XCTAssertEqual(sut.numStr, "-")
+        XCTAssertEqual(sut.numStr, "-0")
     }
     
     func testInvertNumber_Once() {
@@ -153,7 +153,7 @@ class Calculator_StoryboardTests: XCTestCase {
 
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
-        XCTAssertTrue(sut.numStr.isEmpty)
+        XCTAssertEqual(sut.numStr, "0.0")
     }
     
     func testEvaluate_MissingOperator() {
@@ -178,7 +178,7 @@ class Calculator_StoryboardTests: XCTestCase {
     func testClearOutput_Empty() {
         sut.clearOutput()
 
-        XCTAssertTrue(sut.numStr.isEmpty)
+        XCTAssertEqual(sut.numStr, "0")
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
     }
@@ -187,7 +187,7 @@ class Calculator_StoryboardTests: XCTestCase {
         sut.addNumber(key: "6")
         sut.clearOutput()
 
-        XCTAssertTrue(sut.numStr.isEmpty)
+        XCTAssertEqual(sut.numStr, "0")
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
     }
@@ -197,7 +197,7 @@ class Calculator_StoryboardTests: XCTestCase {
         sut.addOperator(key: "/")
         sut.clearOutput()
 
-        XCTAssertTrue(sut.numStr.isEmpty)
+        XCTAssertEqual(sut.numStr, "0")
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
     }
@@ -208,7 +208,7 @@ class Calculator_StoryboardTests: XCTestCase {
         sut.addNumber(key: "6")
         sut.clearOutput()
 
-        XCTAssertTrue(sut.numStr.isEmpty)
+        XCTAssertEqual(sut.numStr, "0")
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
     }
@@ -220,7 +220,7 @@ class Calculator_StoryboardTests: XCTestCase {
         sut.evaluate()
         sut.clearOutput()
 
-        XCTAssertTrue(sut.numStr.isEmpty)
+        XCTAssertEqual(sut.numStr, "0")
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
     }

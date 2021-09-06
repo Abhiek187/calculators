@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     // MARK: Local Variables
     var num1 = 0.0
     var op = ""
-    var numStr = ""
+    var numStr = "0"
     
     // MARK: Functions and Overrides
     override func viewDidLoad() {
@@ -53,13 +53,20 @@ class ViewController: UIViewController {
     }
     
     func clearOutput() {
-        numStr = ""
+        numStr = "0"
         num1 = 0.0
         op = ""
     }
     
     func addNumber(key: String) {
-        numStr += key
+        // Replace a 0 with the number
+        if numStr == "0" {
+            numStr = key
+        } else if numStr == "-0" {
+            numStr = "-\(key)"
+        } else {
+            numStr += key
+        }
     }
     
     func addOperator(key: String) {
@@ -103,11 +110,27 @@ class ViewController: UIViewController {
         numStr = String(result)
         op = ""
     }
+    
+    private func opButtonPressed(key: String) {
+        addOperator(key: key)
+        labelOutput.text?.append(" \(key) ")
+    }
+    
+    private func numButtonPressed(key: String) {
+        addNumber(key: key)
+        
+        if labelOutput.text == "0" {
+            labelOutput.text = key
+        } else if labelOutput.text == "-0" {
+            labelOutput.text = "-\(key)"
+        } else {
+            labelOutput.text?.append(key)
+        }
+    }
 
     // MARK: IBActions
     @IBAction func tappedButtonExponent(_ sender: UIButton) {
-        addOperator(key: "^")
-        labelOutput.text?.append(" ^ ")
+        opButtonPressed(key: "^")
     }
     
     @IBAction func tappedButtonPi(_ sender: UIButton) {
@@ -120,7 +143,7 @@ class ViewController: UIViewController {
     
     @IBAction func tappedButtonClear(_ sender: UIButton) {
         clearOutput()
-        labelOutput.text = ""
+        labelOutput.text = "0"
     }
     
     @IBAction func tappedButtonParenLeft(_ sender: UIButton) {
@@ -132,78 +155,63 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedButtonMod(_ sender: UIButton) {
-        addOperator(key: "%")
-        labelOutput.text?.append(" % ")
+        opButtonPressed(key: "%")
     }
     
     @IBAction func tappedButtonDivide(_ sender: UIButton) {
-        addOperator(key: "/")
-        labelOutput.text?.append(" / ")
+        opButtonPressed(key: "/")
     }
     
     @IBAction func tappedButton7(_ sender: UIButton) {
-        addNumber(key: "7")
-        labelOutput.text?.append("7")
+        numButtonPressed(key: "7")
     }
     
     @IBAction func tappedButton8(_ sender: UIButton) {
-        addNumber(key: "8")
-        labelOutput.text?.append("8")
+        numButtonPressed(key: "8")
     }
     
     @IBAction func tappedButton9(_ sender: UIButton) {
-        addNumber(key: "9")
-        labelOutput.text?.append("9")
+        numButtonPressed(key: "9")
     }
     
     @IBAction func tappedButtonMultiply(_ sender: UIButton) {
-        addOperator(key: "*")
-        labelOutput.text?.append(" * ")
+        opButtonPressed(key: "*")
     }
     
     @IBAction func tappedButton4(_ sender: UIButton) {
-        addNumber(key: "4")
-        labelOutput.text?.append("4")
+        numButtonPressed(key: "4")
     }
     
     @IBAction func tappedButton5(_ sender: UIButton) {
-        addNumber(key: "5")
-        labelOutput.text?.append("5")
+        numButtonPressed(key: "5")
     }
     
     @IBAction func tappedButton6(_ sender: UIButton) {
-        addNumber(key: "6")
-        labelOutput.text?.append("6")
+        numButtonPressed(key: "6")
     }
     
     @IBAction func tappedButtonMinus(_ sender: UIButton) {
-        addOperator(key: "-")
-        labelOutput.text?.append(" - ")
+        opButtonPressed(key: "-")
     }
     
     @IBAction func tappedButton1(_ sender: UIButton) {
-        addNumber(key: "1")
-        labelOutput.text?.append("1")
+        numButtonPressed(key: "1")
     }
     
     @IBAction func tappedButton2(_ sender: UIButton) {
-        addNumber(key: "2")
-        labelOutput.text?.append("2")
+        numButtonPressed(key: "2")
     }
     
     @IBAction func tappedButton3(_ sender: UIButton) {
-        addNumber(key: "3")
-        labelOutput.text?.append("3")
+        numButtonPressed(key: "3")
     }
     
     @IBAction func tappedButtonPlus(_ sender: UIButton) {
-        addOperator(key: "+")
-        labelOutput.text?.append(" + ")
+        opButtonPressed(key: "+")
     }
     
     @IBAction func tappedButton0(_ sender: UIButton) {
-        addNumber(key: "0")
-        labelOutput.text?.append("0")
+        numButtonPressed(key: "0")
     }
     
     @IBAction func tappedButtonDot(_ sender: UIButton) {
