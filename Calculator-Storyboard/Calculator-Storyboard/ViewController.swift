@@ -119,8 +119,14 @@ class ViewController: UIViewController {
     }
     
     private func opButtonPressed(key: String) {
-        addOperator(key: key)
-        labelOutput.text?.append(" \(key) ")
+        // Simplify the left side of the expression before chaining additional operators
+        evaluate()
+        
+        if Double(numStr) != nil {
+            labelOutput.text = numStr
+            addOperator(key: key)
+            labelOutput.text?.append(" \(key) ")
+        }
     }
     
     private func numButtonPressed(key: String) {

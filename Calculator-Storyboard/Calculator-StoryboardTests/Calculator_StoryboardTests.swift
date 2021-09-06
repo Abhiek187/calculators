@@ -40,7 +40,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertEqual(sut.numStr, "3.14")
     }
     
-    func testAddNumber_SecondDecimal() {
+    func testAddNumber_MultipleDecimals() {
         sut.addNumber(key: "8")
         sut.addDecimal()
         sut.addDecimal()

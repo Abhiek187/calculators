@@ -71,9 +71,6 @@ class Calculator_StoryboardUITests: XCTestCase {
         XCTAssertEqual(labelOutput.label, "-0.1 * ")
         button7.tap()
         XCTAssertEqual(labelOutput.label, "-0.1 * 7")
-        buttonEquals.tap()
-        XCTAssertEqual(labelOutput.label, "-0.7000000000000001")
-        
         buttonDivide.tap()
         XCTAssertEqual(labelOutput.label, "-0.7000000000000001 / ")
         button2.tap()
