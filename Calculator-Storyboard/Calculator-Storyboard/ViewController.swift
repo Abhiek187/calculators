@@ -69,6 +69,13 @@ class ViewController: UIViewController {
         }
     }
     
+    func addDecimal() {
+        // Don't add another decimal point if the number already contains one
+        if !numStr.contains(".") {
+            numStr += "."
+        }
+    }
+    
     func addOperator(key: String) {
         guard let num = Double(numStr) else { return }
         num1 = num
@@ -215,8 +222,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedButtonDot(_ sender: UIButton) {
-        addNumber(key: ".")
-        labelOutput.text?.append(".")
+        if !numStr.contains(".") {
+            addDecimal()
+            labelOutput.text?.append(".")
+        }
     }
     
     @IBAction func tappedButtonNegative(_ sender: UIButton) {

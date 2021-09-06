@@ -33,11 +33,21 @@ class Calculator_StoryboardTests: XCTestCase {
     
     func testAddNumber_Decimal() {
         sut.addNumber(key: "3")
-        sut.addNumber(key: ".")
+        sut.addDecimal()
         sut.addNumber(key: "1")
         sut.addNumber(key: "4")
 
         XCTAssertEqual(sut.numStr, "3.14")
+    }
+    
+    func testAddNumber_SecondDecimal() {
+        sut.addNumber(key: "8")
+        sut.addDecimal()
+        sut.addDecimal()
+        sut.addNumber(key: "0")
+        sut.addDecimal()
+        
+        XCTAssertEqual(sut.numStr, "8.0")
     }
     
     func testAddOperator_Valid() {
