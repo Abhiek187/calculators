@@ -81,20 +81,24 @@ class _CalculatorState extends State<Calculator> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              margin: EdgeInsets.all(10),
-              child: Text(
-                output,
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontSize: 40,
+            Expanded(
+              flex: 1,
+              child: Container(
+                width: double.infinity,
+                margin: EdgeInsets.all(10),
+                child: Text(
+                  output,
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
               ),
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              flex: 3,
+              child: ListView(
+                shrinkWrap: true,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -127,6 +131,9 @@ class _CalculatorState extends State<Calculator> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -157,6 +164,9 @@ class _CalculatorState extends State<Calculator> {
                         },
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -195,6 +205,9 @@ class _CalculatorState extends State<Calculator> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -232,6 +245,9 @@ class _CalculatorState extends State<Calculator> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -268,6 +284,9 @@ class _CalculatorState extends State<Calculator> {
                         },
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
