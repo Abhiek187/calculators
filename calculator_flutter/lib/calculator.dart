@@ -80,7 +80,6 @@ class _CalculatorState extends State<Calculator> {
       ),
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
               width: double.infinity,
@@ -93,215 +92,222 @@ class _CalculatorState extends State<Calculator> {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RoundButton(
-                  color: Colors.black,
-                  text: '^',
-                  onPress: () {
-                    addOperator('^');
-                    setState(() => output += ' ^ ');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.black,
-                  text: 'π',
-                  onPress: null,
-                ),
-                RoundButton(
-                  color: Colors.black,
-                  text: 'ln',
-                  onPress: null,
-                ),
-                RoundButton(
-                  color: Colors.red,
-                  text: 'clear',
-                  onPress: () {
-                    clearOutput();
-                    setState(() => output = '');
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RoundButton(
-                  color: Colors.black,
-                  text: '(',
-                  onPress: null,
-                ),
-                RoundButton(
-                  color: Colors.black,
-                  text: ')',
-                  onPress: null,
-                ),
-                RoundButton(
-                  color: Colors.green,
-                  text: '%',
-                  onPress: () {
-                    addOperator('%');
-                    setState(() => output += ' % ');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.green,
-                  text: '/',
-                  onPress: () {
-                    addOperator('/');
-                    setState(() => output += ' / ');
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RoundButton(
-                  color: Colors.orange,
-                  text: '7',
-                  onPress: () {
-                    addNumber('7');
-                    setState(() => output += '7');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.orange,
-                  text: '8',
-                  onPress: () {
-                    addNumber('8');
-                    setState(() => output += '8');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.orange,
-                  text: '9',
-                  onPress: () {
-                    addNumber('9');
-                    setState(() => output += '9');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.green,
-                  text: '*',
-                  onPress: () {
-                    addOperator('*');
-                    setState(() => output += ' * ');
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RoundButton(
-                  color: Colors.orange,
-                  text: '4',
-                  onPress: () {
-                    addNumber('4');
-                    setState(() => output += '4');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.orange,
-                  text: '5',
-                  onPress: () {
-                    addNumber('5');
-                    setState(() => output += '5');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.orange,
-                  text: '6',
-                  onPress: () {
-                    addNumber('6');
-                    setState(() => output += '6');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.green,
-                  text: '-',
-                  onPress: () {
-                    addOperator('-');
-                    setState(() => output += ' - ');
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RoundButton(
-                  color: Colors.orange,
-                  text: '1',
-                  onPress: () {
-                    addNumber('1');
-                    setState(() => output += '1');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.orange,
-                  text: '2',
-                  onPress: () {
-                    addNumber('2');
-                    setState(() => output += '2');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.orange,
-                  text: '3',
-                  onPress: () {
-                    addNumber('3');
-                    setState(() => output += '3');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.green,
-                  text: '+',
-                  onPress: () {
-                    addOperator('+');
-                    setState(() => output += ' + ');
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RoundButton(
-                  color: Colors.orange,
-                  text: '0',
-                  onPress: () {
-                    addNumber('0');
-                    setState(() => output += '0');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.black,
-                  text: '.',
-                  onPress: () {
-                    addNumber('.');
-                    setState(() => output += '.');
-                  },
-                ),
-                RoundButton(
-                  color: Colors.black,
-                  text: '(-)',
-                  onPress: () {
-                    invertNumber();
-                    setState(() => output = numStr);
-                  },
-                ),
-                RoundButton(
-                  color: Colors.blue,
-                  text: '=',
-                  onPress: () {
-                    evaluate();
-                    setState(() => output = numStr);
-                  },
-                ),
-              ],
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RoundButton(
+                        color: Colors.black,
+                        text: '^',
+                        onPress: () {
+                          addOperator('^');
+                          setState(() => output += ' ^ ');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.black,
+                        text: 'π',
+                        onPress: null,
+                      ),
+                      RoundButton(
+                        color: Colors.black,
+                        text: 'ln',
+                        onPress: null,
+                      ),
+                      RoundButton(
+                        color: Colors.red,
+                        text: 'clear',
+                        onPress: () {
+                          clearOutput();
+                          setState(() => output = '');
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RoundButton(
+                        color: Colors.black,
+                        text: '(',
+                        onPress: null,
+                      ),
+                      RoundButton(
+                        color: Colors.black,
+                        text: ')',
+                        onPress: null,
+                      ),
+                      RoundButton(
+                        color: Colors.green,
+                        text: '%',
+                        onPress: () {
+                          addOperator('%');
+                          setState(() => output += ' % ');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.green,
+                        text: '/',
+                        onPress: () {
+                          addOperator('/');
+                          setState(() => output += ' / ');
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '7',
+                        onPress: () {
+                          addNumber('7');
+                          setState(() => output += '7');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '8',
+                        onPress: () {
+                          addNumber('8');
+                          setState(() => output += '8');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '9',
+                        onPress: () {
+                          addNumber('9');
+                          setState(() => output += '9');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.green,
+                        text: '*',
+                        onPress: () {
+                          addOperator('*');
+                          setState(() => output += ' * ');
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '4',
+                        onPress: () {
+                          addNumber('4');
+                          setState(() => output += '4');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '5',
+                        onPress: () {
+                          addNumber('5');
+                          setState(() => output += '5');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '6',
+                        onPress: () {
+                          addNumber('6');
+                          setState(() => output += '6');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.green,
+                        text: '-',
+                        onPress: () {
+                          addOperator('-');
+                          setState(() => output += ' - ');
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '1',
+                        onPress: () {
+                          addNumber('1');
+                          setState(() => output += '1');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '2',
+                        onPress: () {
+                          addNumber('2');
+                          setState(() => output += '2');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '3',
+                        onPress: () {
+                          addNumber('3');
+                          setState(() => output += '3');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.green,
+                        text: '+',
+                        onPress: () {
+                          addOperator('+');
+                          setState(() => output += ' + ');
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RoundButton(
+                        color: Colors.orange,
+                        text: '0',
+                        onPress: () {
+                          addNumber('0');
+                          setState(() => output += '0');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.black,
+                        text: '.',
+                        onPress: () {
+                          addNumber('.');
+                          setState(() => output += '.');
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.black,
+                        text: '(-)',
+                        onPress: () {
+                          invertNumber();
+                          setState(() => output = numStr);
+                        },
+                      ),
+                      RoundButton(
+                        color: Colors.blue,
+                        text: '=',
+                        onPress: () {
+                          evaluate();
+                          setState(() => output = numStr);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
