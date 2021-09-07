@@ -236,11 +236,20 @@ class ViewController: UIViewController {
     
     @IBAction func tappedButtonNegative(_ sender: UIButton) {
         invertNumber()
-        labelOutput.text = numStr
+        
+        if !op.isEmpty {
+            // Negate the right side of the expression
+            labelOutput.text = "\(num1) \(op) \(numStr)"
+        } else {
+            labelOutput.text = numStr
+        }
     }
     
     @IBAction func tappedButtonEquals(_ sender: UIButton) {
         evaluate()
-        labelOutput.text = numStr
+        
+        if !numStr.isEmpty {
+            labelOutput.text = numStr
+        }
     }
 }

@@ -29,6 +29,7 @@ class Calculator_StoryboardUITests: XCTestCase {
     }
     
     func testSimpleEquation() {
+        // 2 + 3 = 5
         let labelOutput = app.staticTexts.firstMatch
         let button2 = app.buttons["2"]
         let buttonPlus = app.buttons["+"]
@@ -39,14 +40,15 @@ class Calculator_StoryboardUITests: XCTestCase {
         button2.tap()
         XCTAssertEqual(labelOutput.label, "2")
         buttonPlus.tap()
-        XCTAssertEqual(labelOutput.label, "2 + ")
+        XCTAssertEqual(labelOutput.label, "2.0 + ")
         button3.tap()
-        XCTAssertEqual(labelOutput.label, "2 + 3")
+        XCTAssertEqual(labelOutput.label, "2.0 + 3")
         buttonEquals.tap()
         XCTAssertEqual(labelOutput.label, "5.0")
     }
 
     func testComplexEquation() {
+        // -0.1 * 7 / 2 = -0.35
         let labelOutput = app.staticTexts.firstMatch
         let buttonNegative = app.buttons["(-)"]
         let button0 = app.buttons["0"]
@@ -77,5 +79,38 @@ class Calculator_StoryboardUITests: XCTestCase {
         XCTAssertEqual(labelOutput.label, "-0.7000000000000001 / 2")
         buttonEquals.tap()
         XCTAssertEqual(labelOutput.label, "-0.35000000000000003")
+    }
+    
+    func testWeirdEquation() {
+        // 0 ^ 0 = 1, 1 / -0 = -infinity, -infinity % 0 = NaN
+        let labelOutput = app.staticTexts.firstMatch
+        let buttonExponent = app.buttons["^"]
+        let button0 = app.buttons["0"]
+        let buttonNegative = app.buttons["(-)"]
+        let buttonDivide = app.buttons["/"]
+        let buttonMod = app.buttons["%"]
+        let buttonEquals = app.buttons["="]
+        
+        XCTAssertEqual(labelOutput.label, "0")
+        buttonExponent.tap()
+        XCTAssertEqual(labelOutput.label, "0.0 ^ ")
+        button0.tap()
+        XCTAssertEqual(labelOutput.label, "0.0 ^ 0")
+        buttonDivide.tap()
+        XCTAssertEqual(labelOutput.label, "1.0 / ")
+        buttonNegative.tap()
+        XCTAssertEqual(labelOutput.label, "1.0 / -")
+        button0.tap()
+        XCTAssertEqual(labelOutput.label, "1.0 / -0")
+        buttonMod.tap()
+        XCTAssertEqual(labelOutput.label, "-inf % ")
+        button0.tap()
+        XCTAssertEqual(labelOutput.label, "-inf % 0")
+        buttonNegative.tap()
+        XCTAssertEqual(labelOutput.label, "-inf % -0")
+        buttonNegative.tap()
+        XCTAssertEqual(labelOutput.label, "-inf % 0")
+        buttonEquals.tap()
+        XCTAssertEqual(labelOutput.label, "nan")
     }
 }
