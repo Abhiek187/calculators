@@ -64,8 +64,8 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z4L-yR-79b">
                                                         <rect key="frame" x="214.5" y="0.0" width="60" height="60"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="ln">
+                                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                        <state key="normal" title="↩︎">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -75,7 +75,7 @@
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="tappedButtonLn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IUl-BS-gih"/>
+                                                            <action selector="tappedButtonBackspace:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vi7-bu-ffr"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1U-Ss-kaO">
@@ -567,12 +567,12 @@
                         <outlet property="button7" destination="mph-h4-zV6" id="tJi-L1-evj"/>
                         <outlet property="button8" destination="66h-pq-slb" id="SZO-rq-nG5"/>
                         <outlet property="button9" destination="F28-vC-ph5" id="EhH-LU-8HH"/>
+                        <outlet property="buttonBackspace" destination="z4L-yR-79b" id="NQR-GH-tMb"/>
                         <outlet property="buttonClear" destination="U1U-Ss-kaO" id="pxS-Co-jYW"/>
                         <outlet property="buttonDivide" destination="7ZS-7D-Fve" id="Lla-Kc-aqx"/>
                         <outlet property="buttonDot" destination="oRr-2t-Dwe" id="sqM-kW-7j3"/>
                         <outlet property="buttonEquals" destination="7dH-qx-1QT" id="EPt-qn-KTM"/>
                         <outlet property="buttonExponent" destination="ZSD-K1-rWi" id="Ovq-0O-nbY"/>
-                        <outlet property="buttonLn" destination="z4L-yR-79b" id="JAM-xe-Sd9"/>
                         <outlet property="buttonMinus" destination="4vn-EX-Upq" id="tHF-ka-w74"/>
                         <outlet property="buttonMod" destination="MJh-7K-jfQ" id="eMV-0l-3cA"/>
                         <outlet property="buttonMultiply" destination="fjd-re-Q9v" id="pn8-ob-9ix"/>

@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var buttonExponent: UIButton!
     @IBOutlet weak var buttonPi: UIButton!
-    @IBOutlet weak var buttonLn: UIButton!
+    @IBOutlet weak var buttonBackspace: UIButton!
     @IBOutlet weak var buttonClear: UIButton!
     
     @IBOutlet weak var buttonParenLeft: UIButton!
@@ -92,6 +92,21 @@ class ViewController: UIViewController {
         }
     }
     
+    func backspace() {
+        if !numStr.isEmpty {
+            numStr.removeLast()
+            
+            if numStr.isEmpty {
+                numStr = "0" // show 0 when there's no text
+            }
+        } else if !op.isEmpty {
+            // Undo addOperator after deleting an operator
+            numStr = String(num1)
+            num1 = 0.0
+            op = ""
+        }
+    }
+    
     func evaluate() {
         guard let num2 = Double(numStr) else { return }
         let result: Double
@@ -150,8 +165,22 @@ class ViewController: UIViewController {
         sender.isEnabled = false
     }
     
-    @IBAction func tappedButtonLn(_ sender: UIButton) {
-        sender.isEnabled = false
+    @IBAction func tappedButtonBackspace(_ sender: UIButton) {
+        backspace()
+        
+        if let output = labelOutput.text, !output.isEmpty {
+            let index = output.index(before: output.endIndex)
+            
+            if output[index..<output.endIndex] == " " {
+                labelOutput.text?.removeLast(3) // remove the spaces in between the operator
+            } else {
+                labelOutput.text?.remove(at: index)
+            }
+            
+            if let newOutput = labelOutput.text, newOutput.isEmpty {
+                labelOutput.text = "0"
+            }
+        }
     }
     
     @IBAction func tappedButtonClear(_ sender: UIButton) {

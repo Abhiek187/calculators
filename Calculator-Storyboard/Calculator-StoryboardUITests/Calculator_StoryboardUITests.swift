@@ -113,4 +113,46 @@ class Calculator_StoryboardUITests: XCTestCase {
         buttonEquals.tap()
         XCTAssertEqual(labelOutput.label, "nan")
     }
+    
+    func testNoEquation() {
+        // -1 ^ 0.5
+        let labelOutput = app.staticTexts.firstMatch
+        let button1 = app.buttons["1"]
+        let buttonNegative = app.buttons["(-)"]
+        let buttonExponent = app.buttons["^"]
+        let button0 = app.buttons["0"]
+        let buttonDot = app.buttons["."]
+        let button5 = app.buttons["5"]
+        let buttonBack = app.buttons["↩︎"]
+        
+        XCTAssertEqual(labelOutput.label, "0")
+        button1.tap()
+        XCTAssertEqual(labelOutput.label, "1")
+        buttonNegative.tap()
+        XCTAssertEqual(labelOutput.label, "-1")
+        buttonExponent.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ ")
+        button0.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0")
+        buttonDot.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0.")
+        button5.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0.5")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0.")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ ")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "0")
+    }
 }

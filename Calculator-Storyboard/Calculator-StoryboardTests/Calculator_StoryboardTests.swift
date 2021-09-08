@@ -91,6 +91,54 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertEqual(sut.numStr, "54")
     }
     
+    func testBackspace_Empty() {
+        sut.backspace()
+        
+        XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
+        XCTAssertTrue(sut.op.isEmpty)
+        XCTAssertEqual(sut.numStr, "0")
+    }
+    
+    func testBackspace_SingleNum() {
+        sut.addNumber(key: "9")
+        sut.backspace()
+        
+        XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
+        XCTAssertTrue(sut.op.isEmpty)
+        XCTAssertEqual(sut.numStr, "0")
+    }
+    
+    func testBackspace_DoubleNum() {
+        sut.addNumber(key: "7")
+        sut.addNumber(key: "8")
+        sut.backspace()
+        
+        XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
+        XCTAssertTrue(sut.op.isEmpty)
+        XCTAssertEqual(sut.numStr, "7")
+    }
+    
+    func testBackspace_Operator() {
+        sut.addNumber(key: "0")
+        sut.addOperator(key: "/")
+        sut.backspace()
+        
+        XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
+        XCTAssertTrue(sut.op.isEmpty)
+        XCTAssertEqual(sut.numStr, "0.0")
+    }
+    
+    func testBackspace_SecondNum() {
+        sut.addNumber(key: "2")
+        sut.addOperator(key: "^")
+        sut.addNumber(key: "8")
+        sut.backspace()
+        
+        XCTAssertEqual(sut.num1, 2.0, accuracy: Double.ulpOfOne)
+        XCTAssertEqual(sut.op, "^")
+        XCTAssertEqual(sut.numStr, "0")
+    }
+    
     func testEvaluate_ValidAdd() {
         sut.addNumber(key: "2")
         sut.addOperator(key: "+")
