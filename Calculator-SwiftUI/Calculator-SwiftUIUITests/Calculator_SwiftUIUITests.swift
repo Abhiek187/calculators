@@ -29,23 +29,27 @@ class Calculator_SwiftUIUITests: XCTestCase {
     }
     
     func testSimpleEquation() {
+        // 2 + 3 = 5
+        let labelOutput = app.staticTexts.firstMatch
         let button2 = app.buttons["2"]
         let buttonPlus = app.buttons["+"]
         let button3 = app.buttons["3"]
         let buttonEquals = app.buttons["="]
         
+        XCTAssertEqual(labelOutput.label, "0")
         button2.tap()
-        let labelOutput = app.staticTexts.firstMatch
         XCTAssertEqual(labelOutput.label, "2")
         buttonPlus.tap()
-        XCTAssertEqual(labelOutput.label, "2 + ")
+        XCTAssertEqual(labelOutput.label, "2.0 + ")
         button3.tap()
-        XCTAssertEqual(labelOutput.label, "2 + 3")
+        XCTAssertEqual(labelOutput.label, "2.0 + 3")
         buttonEquals.tap()
         XCTAssertEqual(labelOutput.label, "5.0")
     }
 
     func testComplexEquation() {
+        // -0.1 * 7 / 2 = -0.35
+        let labelOutput = app.staticTexts.firstMatch
         let buttonNegative = app.buttons["(-)"]
         let button0 = app.buttons["0"]
         let buttonDot = app.buttons["."]
@@ -56,9 +60,9 @@ class Calculator_SwiftUIUITests: XCTestCase {
         let buttonDivide = app.buttons["/"]
         let button2 = app.buttons["2"]
         
+        XCTAssertEqual(labelOutput.label, "0")
         buttonNegative.tap()
-        let labelOutput = app.staticTexts.firstMatch
-        XCTAssertEqual(labelOutput.label, "-")
+        XCTAssertEqual(labelOutput.label, "-0")
         button0.tap()
         XCTAssertEqual(labelOutput.label, "-0")
         buttonDot.tap()
@@ -69,14 +73,86 @@ class Calculator_SwiftUIUITests: XCTestCase {
         XCTAssertEqual(labelOutput.label, "-0.1 * ")
         button7.tap()
         XCTAssertEqual(labelOutput.label, "-0.1 * 7")
-        buttonEquals.tap()
-        XCTAssertEqual(labelOutput.label, "-0.7000000000000001")
-        
         buttonDivide.tap()
         XCTAssertEqual(labelOutput.label, "-0.7000000000000001 / ")
         button2.tap()
         XCTAssertEqual(labelOutput.label, "-0.7000000000000001 / 2")
         buttonEquals.tap()
         XCTAssertEqual(labelOutput.label, "-0.35000000000000003")
+    }
+    
+    func testWeirdEquation() {
+        // 0 ^ 0 = 1, 1 / -0 = -infinity, -infinity % 0 = NaN
+        let labelOutput = app.staticTexts.firstMatch
+        let buttonExponent = app.buttons["^"]
+        let button0 = app.buttons["0"]
+        let buttonNegative = app.buttons["(-)"]
+        let buttonDivide = app.buttons["/"]
+        let buttonMod = app.buttons["%"]
+        let buttonEquals = app.buttons["="]
+
+        XCTAssertEqual(labelOutput.label, "0")
+        buttonExponent.tap()
+        XCTAssertEqual(labelOutput.label, "0.0 ^ ")
+        button0.tap()
+        XCTAssertEqual(labelOutput.label, "0.0 ^ 0")
+        buttonDivide.tap()
+        XCTAssertEqual(labelOutput.label, "1.0 / ")
+        buttonNegative.tap()
+        XCTAssertEqual(labelOutput.label, "1.0 / -")
+        button0.tap()
+        XCTAssertEqual(labelOutput.label, "1.0 / -0")
+        buttonMod.tap()
+        XCTAssertEqual(labelOutput.label, "-inf % ")
+        button0.tap()
+        XCTAssertEqual(labelOutput.label, "-inf % 0")
+        buttonNegative.tap()
+        XCTAssertEqual(labelOutput.label, "-inf % -0")
+        buttonNegative.tap()
+        XCTAssertEqual(labelOutput.label, "-inf % 0")
+        buttonEquals.tap()
+        XCTAssertEqual(labelOutput.label, "nan")
+    }
+    
+    func testNoEquation() {
+        // -1 ^ 0.5
+        let labelOutput = app.staticTexts.firstMatch
+        let button1 = app.buttons["1"]
+        let buttonNegative = app.buttons["(-)"]
+        let buttonExponent = app.buttons["^"]
+        let button0 = app.buttons["0"]
+        let buttonDot = app.buttons["."]
+        let button5 = app.buttons["5"]
+        let buttonBack = app.buttons["↩︎"]
+
+        XCTAssertEqual(labelOutput.label, "0")
+        button1.tap()
+        XCTAssertEqual(labelOutput.label, "1")
+        buttonNegative.tap()
+        XCTAssertEqual(labelOutput.label, "-1")
+        buttonExponent.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ ")
+        button0.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0")
+        buttonDot.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0.")
+        button5.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0.5")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0.")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ 0")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0 ^ ")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.0")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1.")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-1")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "-")
+        buttonBack.tap()
+        XCTAssertEqual(labelOutput.label, "0")
     }
 }

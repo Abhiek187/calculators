@@ -58,6 +58,19 @@ class Calculator_SwiftUITests: XCTestCase {
             XCTAssertEqual(sut.output, "3.14")
         }
     }
+    
+    func testAddNumber_MultipleDecimals() {
+        inspectWrapper { sut in
+            sut.addNumber(key: "8")
+            sut.addDecimal()
+            sut.addDecimal()
+            sut.addNumber(key: "0")
+            sut.addDecimal()
+
+            XCTAssertEqual(sut.numStr, "8.0")
+            XCTAssertEqual(sut.output, "8.0")
+        }
+    }
 
     func testAddOperator_Valid() {
         inspectWrapper { sut in
@@ -68,18 +81,18 @@ class Calculator_SwiftUITests: XCTestCase {
             XCTAssertEqual(sut.num1, 21.0, accuracy: Double.ulpOfOne)
             XCTAssertEqual(sut.op, "%")
             XCTAssertTrue(sut.numStr.isEmpty)
-            XCTAssertEqual(sut.output, "21 % ")
+            XCTAssertEqual(sut.output, "21.0 % ")
         }
     }
 
-    func testAddOperator_Invalid() {
+    func testAddOperator_Empty() {
         inspectWrapper { sut in
             sut.addOperator(key: "+")
 
             XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
-            XCTAssertTrue(sut.op.isEmpty)
+            XCTAssertEqual(sut.op, "+")
             XCTAssertTrue(sut.numStr.isEmpty)
-            XCTAssertTrue(sut.output.isEmpty)
+            XCTAssertEqual(sut.output, "0.0 + ")
         }
     }
 
@@ -87,8 +100,8 @@ class Calculator_SwiftUITests: XCTestCase {
         inspectWrapper { sut in
             sut.invertNumber()
 
-            XCTAssertEqual(sut.numStr, "-")
-            XCTAssertEqual(sut.output, "-")
+            XCTAssertEqual(sut.numStr, "-0")
+            XCTAssertEqual(sut.output, "-0")
         }
     }
 
@@ -112,6 +125,69 @@ class Calculator_SwiftUITests: XCTestCase {
 
             XCTAssertEqual(sut.numStr, "54")
             XCTAssertEqual(sut.output, "54")
+        }
+    }
+    
+    func testBackspace_Empty() {
+        inspectWrapper { sut in
+            sut.backspace()
+
+            XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
+            XCTAssertTrue(sut.op.isEmpty)
+            XCTAssertEqual(sut.numStr, "0")
+            XCTAssertEqual(sut.output, "0")
+        }
+    }
+
+    func testBackspace_SingleNum() {
+        inspectWrapper { sut in
+            sut.addNumber(key: "9")
+            sut.backspace()
+
+            XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
+            XCTAssertTrue(sut.op.isEmpty)
+            XCTAssertEqual(sut.numStr, "0")
+            XCTAssertEqual(sut.output, "0")
+        }
+    }
+
+    func testBackspace_DoubleNum() {
+        inspectWrapper { sut in
+            sut.addNumber(key: "7")
+            sut.addNumber(key: "8")
+            sut.backspace()
+
+            XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
+            XCTAssertTrue(sut.op.isEmpty)
+            XCTAssertEqual(sut.numStr, "7")
+            XCTAssertEqual(sut.output, "7")
+        }
+    }
+
+    func testBackspace_Operator() {
+        inspectWrapper { sut in
+            sut.addNumber(key: "0")
+            sut.addOperator(key: "/")
+            sut.backspace()
+
+            XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
+            XCTAssertTrue(sut.op.isEmpty)
+            XCTAssertEqual(sut.numStr, "0.0")
+            XCTAssertEqual(sut.output, "0.0")
+        }
+    }
+
+    func testBackspace_SecondNum() {
+        inspectWrapper { sut in
+            sut.addNumber(key: "2")
+            sut.addOperator(key: "^")
+            sut.addNumber(key: "8")
+            sut.backspace()
+
+            XCTAssertEqual(sut.num1, 2.0, accuracy: Double.ulpOfOne)
+            XCTAssertEqual(sut.op, "^")
+            XCTAssertEqual(sut.numStr, "0")
+            XCTAssertEqual(sut.output, "2.0 ^ ")
         }
     }
 
@@ -206,8 +282,8 @@ class Calculator_SwiftUITests: XCTestCase {
 
             XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
             XCTAssertTrue(sut.op.isEmpty)
-            XCTAssertTrue(sut.numStr.isEmpty)
-            XCTAssertTrue(sut.output.isEmpty)
+            XCTAssertEqual(sut.numStr, "0.0")
+            XCTAssertEqual(sut.output, "0.0")
         }
     }
 
@@ -232,7 +308,7 @@ class Calculator_SwiftUITests: XCTestCase {
             XCTAssertEqual(sut.num1, 2.0, accuracy: Double.ulpOfOne)
             XCTAssertEqual(sut.op, "^")
             XCTAssertTrue(sut.numStr.isEmpty)
-            XCTAssertEqual(sut.output, "2 ^ ")
+            XCTAssertEqual(sut.output, "2.0 ^ ")
         }
     }
 
@@ -240,10 +316,10 @@ class Calculator_SwiftUITests: XCTestCase {
         inspectWrapper { sut in
             sut.clearOutput()
 
-            XCTAssertTrue(sut.numStr.isEmpty)
+            XCTAssertEqual(sut.numStr, "0")
             XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
             XCTAssertTrue(sut.op.isEmpty)
-            XCTAssertTrue(sut.output.isEmpty)
+            XCTAssertEqual(sut.output, "0")
         }
     }
 
@@ -252,10 +328,10 @@ class Calculator_SwiftUITests: XCTestCase {
             sut.addNumber(key: "6")
             sut.clearOutput()
 
-            XCTAssertTrue(sut.numStr.isEmpty)
+            XCTAssertEqual(sut.numStr, "0")
             XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
             XCTAssertTrue(sut.op.isEmpty)
-            XCTAssertTrue(sut.output.isEmpty)
+            XCTAssertEqual(sut.output, "0")
         }
     }
 
@@ -265,10 +341,10 @@ class Calculator_SwiftUITests: XCTestCase {
             sut.addOperator(key: "/")
             sut.clearOutput()
 
-            XCTAssertTrue(sut.numStr.isEmpty)
+            XCTAssertEqual(sut.numStr, "0")
             XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
             XCTAssertTrue(sut.op.isEmpty)
-            XCTAssertTrue(sut.output.isEmpty)
+            XCTAssertEqual(sut.output, "0")
         }
     }
 
@@ -279,10 +355,10 @@ class Calculator_SwiftUITests: XCTestCase {
             sut.addNumber(key: "6")
             sut.clearOutput()
 
-            XCTAssertTrue(sut.numStr.isEmpty)
+            XCTAssertEqual(sut.numStr, "0")
             XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
             XCTAssertTrue(sut.op.isEmpty)
-            XCTAssertTrue(sut.output.isEmpty)
+            XCTAssertEqual(sut.output, "0")
         }
     }
 
@@ -294,10 +370,10 @@ class Calculator_SwiftUITests: XCTestCase {
             sut.evaluate()
             sut.clearOutput()
 
-            XCTAssertTrue(sut.numStr.isEmpty)
+            XCTAssertEqual(sut.numStr, "0")
             XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
             XCTAssertTrue(sut.op.isEmpty)
-            XCTAssertTrue(sut.output.isEmpty)
+            XCTAssertEqual(sut.output, "0")
         }
     }
 }

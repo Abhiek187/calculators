@@ -53,28 +53,52 @@ extension Text {
 struct ContentView: View {
     @State var num1 = 0.0
     @State var op = ""
-    @State var numStr = ""
-    @State var output = ""
+    @State var numStr = "0"
+    @State var output = "0"
     internal var didAppear: ((Self) -> Void)? // for unit testing
     
     func clearOutput() {
-        numStr = ""
+        numStr = "0"
         num1 = 0.0
         op = ""
-        output = ""
+        output = "0"
     }
     
     func addNumber(key: String) {
-        numStr += key
-        output += key
+        // Replace a 0 with the number
+        if numStr == "0" {
+            numStr = key
+        } else if numStr == "-0" {
+            numStr = "-\(key)"
+        } else {
+            numStr += key
+        }
+        
+        if output == "0" {
+            output = key
+        } else if output == "-0" {
+            output = "-\(key)"
+        } else {
+            output += key
+        }
+    }
+    
+    func addDecimal() {
+        // Don't add another decimal point if the number already contains one
+        if !numStr.contains(".") {
+            numStr += "."
+            output += "."
+        }
     }
     
     func addOperator(key: String) {
+        // Simplify the left side of the expression before chaining additional operators
+        evaluate()
         guard let num = Double(numStr) else { return }
         num1 = num
         op = key
         numStr = ""
-        output += " \(key) "
+        output = "\(num) \(key) "
     }
     
     func invertNumber() {
@@ -85,7 +109,41 @@ struct ContentView: View {
             numStr = "-\(numStr)"
         }
         
-        output = numStr
+        if !op.isEmpty {
+            // Negate the right side of the expression
+            output = "\(num1) \(op) \(numStr)"
+        } else {
+            output = numStr
+        }
+    }
+    
+    func backspace() {
+        if !numStr.isEmpty {
+            numStr.removeLast()
+
+            if numStr.isEmpty {
+                numStr = "0" // show 0 when there's no text
+            }
+        } else if !op.isEmpty {
+            // Undo addOperator after deleting an operator
+            numStr = String(num1)
+            num1 = 0.0
+            op = ""
+        }
+        
+        if !output.isEmpty {
+            let index = output.index(before: output.endIndex)
+
+            if output[index..<output.endIndex] == " " {
+                output.removeLast(3) // remove the spaces in between the operator
+            } else {
+                output.remove(at: index)
+            }
+
+            if output.isEmpty {
+                output = "0"
+            }
+        }
     }
     
     func evaluate() {
@@ -146,12 +204,13 @@ struct ContentView: View {
                         
                         Spacer()
                         
-                        Button(action: {}) {
-                            Text("ln")
+                        Button(action: {
+                            backspace()
+                        }) {
+                            Text("↩︎")
                                 .round()
                         }
-                        .round(color: .secondary)
-                        .disabled(true)
+                        .round(color: .systemRed)
                         
                         Spacer()
                         
@@ -339,7 +398,7 @@ struct ContentView: View {
                         Spacer()
                         
                         Button(action: {
-                            addNumber(key: ".")
+                            addDecimal()
                         }) {
                             Text(".")
                                 .round()
