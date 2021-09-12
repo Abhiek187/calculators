@@ -38,6 +38,17 @@ class MainActivityUnitTest {
     }
 
     @Test
+    fun addNumber_MultipleDecimals() {
+        sut.addNumber('8')
+        sut.addDecimal()
+        sut.addDecimal()
+        sut.addNumber('0')
+        sut.addDecimal()
+
+        assertEquals(sut.numStr, "8.0")
+    }
+
+    @Test
     fun addOperator_Valid() {
         sut.addNumber('2')
         sut.addNumber('1')
@@ -49,11 +60,11 @@ class MainActivityUnitTest {
     }
 
     @Test
-    fun addOperator_Invalid() {
+    fun addOperator_Empty() {
         sut.addOperator('+')
 
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar()) // == \u0000 = \0
+        assertEquals(sut.op, '+')
         assertTrue(sut.numStr.isEmpty())
     }
 
@@ -61,7 +72,7 @@ class MainActivityUnitTest {
     fun invertNumber_Empty() {
         sut.invertNumber()
 
-        assertEquals(sut.numStr, "-")
+        assertEquals(sut.numStr, "-0")
     }
 
     @Test
@@ -81,6 +92,59 @@ class MainActivityUnitTest {
         sut.invertNumber()
 
         assertEquals(sut.numStr, "54")
+    }
+
+    @Test
+    fun backspace_Empty() {
+        sut.backspace()
+
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar()) // == \u0000 = \0
+        assertEquals(sut.numStr, "0")
+    }
+
+    @Test
+    fun backspace_SingleNum() {
+        sut.addNumber('9')
+        sut.backspace()
+
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
+        assertEquals(sut.numStr, "0")
+    }
+
+    @Test
+    fun backspace_DoubleNum() {
+        sut.addNumber('7')
+        sut.addNumber('8')
+        sut.backspace()
+
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
+        assertEquals(sut.numStr, "7")
+    }
+
+    @Test
+    fun backspace_Operator() {
+        sut.addNumber('0')
+        sut.addOperator('/')
+        sut.backspace()
+
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
+        assertEquals(sut.numStr, "0.0")
+    }
+
+    @Test
+    fun backspace_SecondNum() {
+        sut.addNumber('2')
+        sut.addOperator('^')
+        sut.addNumber('8')
+        sut.backspace()
+
+        assertEquals(sut.num1, 2.0, Math.ulp(1.0))
+        assertEquals(sut.op, '^')
+        assertEquals(sut.numStr, "0")
     }
 
     @Test
@@ -162,7 +226,7 @@ class MainActivityUnitTest {
 
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0.0")
     }
 
     @Test
@@ -190,7 +254,7 @@ class MainActivityUnitTest {
     fun clearOutput_Empty() {
         sut.clearOutput()
 
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
     }
@@ -200,7 +264,7 @@ class MainActivityUnitTest {
         sut.addNumber('6')
         sut.clearOutput()
 
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
     }
@@ -211,7 +275,7 @@ class MainActivityUnitTest {
         sut.addOperator('/')
         sut.clearOutput()
 
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
     }
@@ -223,7 +287,7 @@ class MainActivityUnitTest {
         sut.addNumber('6')
         sut.clearOutput()
 
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
     }
@@ -236,7 +300,7 @@ class MainActivityUnitTest {
         sut.evaluate()
         sut.clearOutput()
 
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
     }

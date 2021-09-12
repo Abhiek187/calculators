@@ -30,22 +30,24 @@ class MainActivityInstrumentedTest {
 
     @Test
     fun simpleEquation() {
-        onView(withId(R.id.textViewOutput)).check(matches(withText("")))
+        // 2 + 3 = 5
+        onView(withId(R.id.textViewOutput)).check(matches(withText("0")))
         onView(withId(R.id.button2)).perform(click())
         onView(withId(R.id.textViewOutput)).check(matches(withText("2")))
         onView(withId(R.id.buttonPlus)).perform(click())
-        onView(withId(R.id.textViewOutput)).check(matches(withText("2 + ")))
+        onView(withId(R.id.textViewOutput)).check(matches(withText("2.0 + ")))
         onView(withId(R.id.button3)).perform(click())
-        onView(withId(R.id.textViewOutput)).check(matches(withText("2 + 3")))
+        onView(withId(R.id.textViewOutput)).check(matches(withText("2.0 + 3")))
         onView(withId(R.id.buttonEquals)).perform(click())
         onView(withId(R.id.textViewOutput)).check(matches(withText("5.0")))
     }
 
     @Test
     fun complexEquation() {
-        onView(withId(R.id.textViewOutput)).check(matches(withText("")))
+        // -0.1 * 7 / 2 = -0.35
+        onView(withId(R.id.textViewOutput)).check(matches(withText("0")))
         onView(withId(R.id.buttonNegative)).perform(click())
-        onView(withId(R.id.textViewOutput)).check(matches(withText("-")))
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-0")))
         onView(withId(R.id.button0)).perform(click())
         onView(withId(R.id.textViewOutput)).check(matches(withText("-0")))
         onView(withId(R.id.buttonDot)).perform(click())
@@ -56,9 +58,6 @@ class MainActivityInstrumentedTest {
         onView(withId(R.id.textViewOutput)).check(matches(withText("-0.1 * ")))
         onView(withId(R.id.button7)).perform(click())
         onView(withId(R.id.textViewOutput)).check(matches(withText("-0.1 * 7")))
-        onView(withId(R.id.buttonEquals)).perform(click())
-        onView(withId(R.id.textViewOutput))
-            .check(matches(withText("-0.7000000000000001")))
 
         onView(withId(R.id.buttonDivide)).perform(click())
         onView(withId(R.id.textViewOutput))
@@ -69,5 +68,68 @@ class MainActivityInstrumentedTest {
         onView(withId(R.id.buttonEquals)).perform(click())
         onView(withId(R.id.textViewOutput))
             .check(matches(withText("-0.35000000000000003")))
+    }
+
+    @Test
+    fun weirdEquation() {
+        // 0 ^ 0 = 1, 1 / -0 = -infinity, -infinity % 0 = NaN
+        onView(withId(R.id.textViewOutput)).check(matches(withText("0")))
+        onView(withId(R.id.buttonExponent)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("0.0 ^ ")))
+        onView(withId(R.id.button0)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("0.0 ^ 0")))
+
+        onView(withId(R.id.buttonDivide)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("1.0 / ")))
+        onView(withId(R.id.buttonNegative)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("1.0 / -")))
+        onView(withId(R.id.button0)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("1.0 / -0")))
+
+        onView(withId(R.id.buttonMod)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-Infinity % ")))
+        onView(withId(R.id.button0)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-Infinity % 0")))
+        onView(withId(R.id.buttonNegative)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-Infinity % -0")))
+        onView(withId(R.id.buttonNegative)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-Infinity % 0")))
+        onView(withId(R.id.buttonEquals)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("NaN")))
+    }
+
+    @Test
+    fun noEquation() {
+        // -1 ^ 0.5
+        onView(withId(R.id.textViewOutput)).check(matches(withText("0")))
+        onView(withId(R.id.button1)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("1")))
+        onView(withId(R.id.buttonNegative)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1")))
+        onView(withId(R.id.buttonExponent)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1.0 ^ ")))
+        onView(withId(R.id.button0)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1.0 ^ 0")))
+        onView(withId(R.id.buttonDot)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1.0 ^ 0.")))
+        onView(withId(R.id.button5)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1.0 ^ 0.5")))
+
+        onView(withId(R.id.buttonBackspace)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1.0 ^ 0.")))
+        onView(withId(R.id.buttonBackspace)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1.0 ^ 0")))
+        onView(withId(R.id.buttonBackspace)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1.0 ^ ")))
+        onView(withId(R.id.buttonBackspace)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1.0")))
+        onView(withId(R.id.buttonBackspace)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1.")))
+        onView(withId(R.id.buttonBackspace)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-1")))
+        onView(withId(R.id.buttonBackspace)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("-")))
+        onView(withId(R.id.buttonBackspace)).perform(click())
+        onView(withId(R.id.textViewOutput)).check(matches(withText("0")))
     }
 }

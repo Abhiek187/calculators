@@ -3,7 +3,7 @@
     <string name="exponent">^</string>
 <!--    <string name="pi">&#x1D745;</string>-->
     <string name="pi">\u03C0</string>
-    <string name="ln">ln</string>
+    <string name="back">\u21A9</string>
     <string name="clear">c</string>
     <string name="paren_left">(</string>
     <string name="paren_right">)</string>
