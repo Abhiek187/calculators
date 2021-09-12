@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorNum" format="color" />
+    <attr name="colorOp" format="color" />
+    <attr name="colorEval" format="color" />
+    <attr name="colorClear" format="color" />
+</resources>
