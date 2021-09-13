@@ -81,8 +81,11 @@ fun Calculator(calculatorViewModel: CalculatorViewModel) {
                 text = "π"
             )
             CalculatorButton(
-                color = CalcColors.OTHER,
-                text = "ln"
+                color = CalcColors.CLEAR,
+                text = "\u21A9",
+                onClick = {
+                    calculatorViewModel.backspace()
+                }
             )
             CalculatorButton(
                 color = CalcColors.CLEAR,
@@ -238,7 +241,7 @@ fun Calculator(calculatorViewModel: CalculatorViewModel) {
                 color = CalcColors.OTHER,
                 text = ".",
                 onClick = {
-                    calculatorViewModel.addNumber('.')
+                    calculatorViewModel.addDecimal()
                 }
             )
             CalculatorButton(

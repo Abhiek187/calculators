@@ -29,10 +29,10 @@ class CalculatorInstrumentedTest {
 
     @Test
     fun simpleEquation() {
-        // Calculate 2 + 3 and verify the output is correct at each step
+        // 2 + 3 = 5
         composeTestRule
             .onNode(hasTestTag("output"))
-            .assertTextEquals("")
+            .assertTextEquals("0")
 
         composeTestRule
             .onNodeWithText("2")
@@ -46,14 +46,14 @@ class CalculatorInstrumentedTest {
             .performClick()
         composeTestRule
             .onNode(hasTestTag("output"))
-            .assertTextEquals("2 + ")
+            .assertTextEquals("2.0 + ")
 
         composeTestRule
             .onNodeWithText("3")
             .performClick()
         composeTestRule
             .onNode(hasTestTag("output"))
-            .assertTextEquals("2 + 3")
+            .assertTextEquals("2.0 + 3")
 
         composeTestRule
             .onNodeWithText("=")
@@ -65,17 +65,17 @@ class CalculatorInstrumentedTest {
 
     @Test
     fun complexEquation() {
-        // Calculate -0.1 * 7 / 2 and verify the output is correct at each step
+        // -0.1 * 7 / 2 = -0.35
         composeTestRule
             .onNode(hasTestTag("output"))
-            .assertTextEquals("")
+            .assertTextEquals("0")
 
         composeTestRule
             .onNodeWithText("(-)")
             .performClick()
         composeTestRule
             .onNode(hasTestTag("output"))
-            .assertTextEquals("-")
+            .assertTextEquals("-0")
 
         composeTestRule
             .onNodeWithText("0")
@@ -113,13 +113,6 @@ class CalculatorInstrumentedTest {
             .assertTextEquals("-0.1 * 7")
 
         composeTestRule
-            .onNodeWithText("=")
-            .performClick()
-        composeTestRule
-            .onNode(hasTestTag("output"))
-            .assertTextEquals("-0.7000000000000001")
-
-        composeTestRule
             .onNodeWithText("/")
             .performClick()
         composeTestRule
@@ -139,5 +132,189 @@ class CalculatorInstrumentedTest {
         composeTestRule
             .onNode(hasTestTag("output"))
             .assertTextEquals("-0.35000000000000003")
+    }
+
+    @Test
+    fun weirdEquation() {
+        // 0 ^ 0 = 1, 1 / -0 = -infinity, -infinity % 0 = NaN
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("0")
+
+        composeTestRule
+            .onNodeWithText("^")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("0.0 ^ ")
+
+        composeTestRule
+            .onNodeWithText("0")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("0.0 ^ 0")
+
+        composeTestRule
+            .onNodeWithText("/")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("1.0 / ")
+
+        composeTestRule
+            .onNodeWithText("(-)")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("1.0 / -")
+
+        composeTestRule
+            .onNodeWithText("0")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("1.0 / -0")
+
+        composeTestRule
+            .onNodeWithText("%")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-Infinity % ")
+
+        composeTestRule
+            .onNodeWithText("0")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-Infinity % 0")
+
+        composeTestRule
+            .onNodeWithText("(-)")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-Infinity % -0")
+
+        composeTestRule
+            .onNodeWithText("(-)")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-Infinity % 0")
+
+        composeTestRule
+            .onNodeWithText("=")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("NaN")
+    }
+
+    @Test
+    fun noEquation() {
+        // -1 ^ 0.5
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("0")
+
+        composeTestRule
+            .onNodeWithText("1")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("1")
+
+        composeTestRule
+            .onNodeWithText("(-)")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1")
+
+        composeTestRule
+            .onNodeWithText("^")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1.0 ^ ")
+
+        composeTestRule
+            .onNodeWithText("0")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1.0 ^ 0")
+
+        composeTestRule
+            .onNodeWithText(".")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1.0 ^ 0.")
+
+        composeTestRule
+            .onNodeWithText("5")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1.0 ^ 0.5")
+
+        composeTestRule
+            .onNodeWithText("\u21A9")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1.0 ^ 0.")
+
+        composeTestRule
+            .onNodeWithText("\u21A9")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1.0 ^ 0")
+
+        composeTestRule
+            .onNodeWithText("\u21A9")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1.0 ^ ")
+
+        composeTestRule
+            .onNodeWithText("\u21A9")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1.0")
+
+        composeTestRule
+            .onNodeWithText("\u21A9")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1.")
+
+        composeTestRule
+            .onNodeWithText("\u21A9")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-1")
+
+        composeTestRule
+            .onNodeWithText("\u21A9")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("-")
+
+        composeTestRule
+            .onNodeWithText("\u21A9")
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag("output"))
+            .assertTextEquals("0")
     }
 }

@@ -4,7 +4,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-// Generated using Alt+Enter on the class name
+// Generated using Alt/Option+Enter on the class name
 class CalculatorViewModelTest {
     private lateinit var sut: CalculatorViewModel // system under test
 
@@ -33,6 +33,17 @@ class CalculatorViewModelTest {
     }
 
     @Test
+    fun addNumber_MultipleDecimals() {
+        sut.addNumber('8')
+        sut.addDecimal()
+        sut.addDecimal()
+        sut.addNumber('0')
+        sut.addDecimal()
+
+        assertEquals(sut.numStr, "8.0")
+    }
+
+    @Test
     fun addOperator_Valid() {
         sut.addNumber('2')
         sut.addNumber('1')
@@ -44,11 +55,11 @@ class CalculatorViewModelTest {
     }
 
     @Test
-    fun addOperator_Invalid() {
+    fun addOperator_Empty() {
         sut.addOperator('+')
 
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar()) // == \u0000 = \0
+        assertEquals(sut.op, '+')
         assertTrue(sut.numStr.isEmpty())
     }
 
@@ -56,7 +67,7 @@ class CalculatorViewModelTest {
     fun invertNumber_Empty() {
         sut.invertNumber()
 
-        assertEquals(sut.numStr, "-")
+        assertEquals(sut.numStr, "-0")
     }
 
     @Test
@@ -76,6 +87,59 @@ class CalculatorViewModelTest {
         sut.invertNumber()
 
         assertEquals(sut.numStr, "54")
+    }
+
+    @Test
+    fun backspace_Empty() {
+        sut.backspace()
+
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar()) // == \u0000 = \0
+        assertEquals(sut.numStr, "0")
+    }
+
+    @Test
+    fun backspace_SingleNum() {
+        sut.addNumber('9')
+        sut.backspace()
+
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
+        assertEquals(sut.numStr, "0")
+    }
+
+    @Test
+    fun backspace_DoubleNum() {
+        sut.addNumber('7')
+        sut.addNumber('8')
+        sut.backspace()
+
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
+        assertEquals(sut.numStr, "7")
+    }
+
+    @Test
+    fun backspace_Operator() {
+        sut.addNumber('0')
+        sut.addOperator('/')
+        sut.backspace()
+
+        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
+        assertEquals(sut.op, 0.toChar())
+        assertEquals(sut.numStr, "0.0")
+    }
+
+    @Test
+    fun backspace_SecondNum() {
+        sut.addNumber('2')
+        sut.addOperator('^')
+        sut.addNumber('8')
+        sut.backspace()
+
+        assertEquals(sut.num1, 2.0, Math.ulp(1.0))
+        assertEquals(sut.op, '^')
+        assertEquals(sut.numStr, "0")
     }
 
     @Test
@@ -157,7 +221,7 @@ class CalculatorViewModelTest {
 
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0.0")
     }
 
     @Test
@@ -187,7 +251,7 @@ class CalculatorViewModelTest {
 
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
     }
 
     @Test
@@ -197,7 +261,7 @@ class CalculatorViewModelTest {
 
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
     }
 
     @Test
@@ -208,7 +272,7 @@ class CalculatorViewModelTest {
 
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
     }
 
     @Test
@@ -220,7 +284,7 @@ class CalculatorViewModelTest {
 
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
     }
 
     @Test
@@ -233,6 +297,6 @@ class CalculatorViewModelTest {
 
         assertEquals(sut.num1, 0.0, Math.ulp(1.0))
         assertEquals(sut.op, 0.toChar())
-        assertTrue(sut.numStr.isEmpty())
+        assertEquals(sut.numStr, "0")
     }
 }
