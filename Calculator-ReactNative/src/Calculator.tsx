@@ -12,11 +12,13 @@ import {
   addOperator,
   invertNumber,
   evaluate,
+  backspace,
+  addDecimal,
 } from "./utils/calc-methods";
 import RoundButton from "./RoundButton";
 
 const Calculator: React.FC = () => {
-  const [output, setOutput] = useState<string>("");
+  const [output, setOutput] = useState<string>("0");
   const { height } = useWindowDimensions();
 
   return (
@@ -51,7 +53,11 @@ const Calculator: React.FC = () => {
               onPress={() => setOutput(addOperator("^", output))}
             />
             <RoundButton text="π" color="black" onPress={() => {}} />
-            <RoundButton text="ln" color="black" onPress={() => {}} />
+            <RoundButton
+              text="↩︎"
+              color="red"
+              onPress={() => setOutput(backspace(output))}
+            />
             <RoundButton
               text="clear"
               color="red"
@@ -147,7 +153,7 @@ const Calculator: React.FC = () => {
             <RoundButton
               text="."
               color="black"
-              onPress={() => setOutput(addNumber(".", output))}
+              onPress={() => setOutput(addDecimal(output))}
             />
             <RoundButton
               text="(-)"

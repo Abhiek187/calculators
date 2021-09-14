@@ -16,11 +16,21 @@ describe("AddNumber", () => {
 
   it("adds 2 decimals", () => {
     sut.addNumber("3");
-    sut.addNumber(".");
+    sut.addDecimal();
     sut.addNumber("1");
     sut.addNumber("4");
 
     expect(sut.numStr).toBe("3.14");
+  });
+
+  it("doesn't add multiple decimals", () => {
+    sut.addNumber("8");
+    sut.addDecimal();
+    sut.addDecimal();
+    sut.addNumber("0");
+    sut.addDecimal();
+
+    expect(sut.numStr).toBe("8.0");
   });
 });
 
@@ -35,11 +45,11 @@ describe("AddOperator", () => {
     expect(sut.numStr).toBe("");
   });
 
-  it("works with invalid numbers", () => {
+  it("works with no numbers", () => {
     sut.addOperator("+");
 
     expect(sut.num1).toBeCloseTo(0);
-    expect(sut.op).toBe("");
+    expect(sut.op).toBe("+");
     expect(sut.numStr).toBe("");
   });
 });
@@ -48,7 +58,7 @@ describe("InvertNumber", () => {
   it("inverts nothing", () => {
     sut.invertNumber();
 
-    expect(sut.numStr).toBe("-");
+    expect(sut.numStr).toBe("-0");
   });
 
   it("inverts once", () => {
@@ -66,6 +76,56 @@ describe("InvertNumber", () => {
     sut.invertNumber();
 
     expect(sut.numStr).toBe("54");
+  });
+});
+
+describe("Backspace", () => {
+  it("removes nothing", () => {
+    sut.backspace();
+
+    expect(sut.num1).toBeCloseTo(0);
+    expect(sut.op).toBe("");
+    expect(sut.numStr).toBe("0");
+  });
+
+  it("removes a single number", () => {
+    sut.addNumber("9");
+    sut.backspace();
+
+    expect(sut.num1).toBeCloseTo(0);
+    expect(sut.op).toBe("");
+    expect(sut.numStr).toBe("0");
+  });
+
+  it("removes part of a number", () => {
+    sut.addNumber("7");
+    sut.addNumber("8");
+    sut.backspace();
+
+    expect(sut.num1).toBeCloseTo(0);
+    expect(sut.op).toBe("");
+    expect(sut.numStr).toBe("7");
+  });
+
+  it("removes an operator", () => {
+    sut.addNumber("0");
+    sut.addOperator("/");
+    sut.backspace();
+
+    expect(sut.num1).toBeCloseTo(0);
+    expect(sut.op).toBe("");
+    expect(sut.numStr).toBe("0");
+  });
+
+  it("removes the second number", () => {
+    sut.addNumber("2");
+    sut.addOperator("^");
+    sut.addNumber("8");
+    sut.backspace();
+
+    expect(sut.num1).toBeCloseTo(2);
+    expect(sut.op).toBe("^");
+    expect(sut.numStr).toBe("0");
   });
 });
 
@@ -142,7 +202,7 @@ describe("Evaluate", () => {
 
     expect(sut.num1).toBeCloseTo(0);
     expect(sut.op).toBe("");
-    expect(sut.numStr).toBe("");
+    expect(sut.numStr).toBe("0");
   });
 
   it("evaluates if missing the operator", () => {
@@ -169,7 +229,7 @@ describe("ClearOutput", () => {
   it("clears if empty", () => {
     sut.clearOutput();
 
-    expect(sut.numStr).toBe("");
+    expect(sut.numStr).toBe("0");
     expect(sut.num1).toBeCloseTo(0);
     expect(sut.op).toBe("");
   });
@@ -178,7 +238,7 @@ describe("ClearOutput", () => {
     sut.addNumber("6");
     sut.clearOutput();
 
-    expect(sut.numStr).toBe("");
+    expect(sut.numStr).toBe("0");
     expect(sut.num1).toBeCloseTo(0);
     expect(sut.op).toBe("");
   });
@@ -188,7 +248,7 @@ describe("ClearOutput", () => {
     sut.addNumber("/");
     sut.clearOutput();
 
-    expect(sut.numStr).toBe("");
+    expect(sut.numStr).toBe("0");
     expect(sut.num1).toBeCloseTo(0);
     expect(sut.op).toBe("");
   });
@@ -199,7 +259,7 @@ describe("ClearOutput", () => {
     sut.addNumber("6");
     sut.clearOutput();
 
-    expect(sut.numStr).toBe("");
+    expect(sut.numStr).toBe("0");
     expect(sut.num1).toBeCloseTo(0);
     expect(sut.op).toBe("");
   });
@@ -211,7 +271,7 @@ describe("ClearOutput", () => {
     sut.evaluate();
     sut.clearOutput();
 
-    expect(sut.numStr).toBe("");
+    expect(sut.numStr).toBe("0");
     expect(sut.num1).toBeCloseTo(0);
     expect(sut.op).toBe("");
   });

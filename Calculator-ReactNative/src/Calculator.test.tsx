@@ -14,68 +14,143 @@ describe("Calculator", () => {
 
   afterEach(() => {
     // Clear the output after each test
-    wrapper.find("RoundButton[text='clear']").simulate("press");
+    press("clear");
   });
 
+  const press = (buttonText: string) => {
+    // Press the button
+    wrapper.find(`RoundButton[text='${buttonText}']`).simulate("press");
+  };
+
+  const expectOutput = (expectedOutput: string) => {
+    // Check that the output displays the correct string
+    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe(
+      expectedOutput
+    );
+  };
+
   it("solves a simple equation", () => {
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("");
+    // 2 + 3 = 5
+    expectOutput("0");
 
-    wrapper.find("RoundButton[text='2']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("2");
+    press("2");
+    expectOutput("2");
 
-    wrapper.find("RoundButton[text='+']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("2 + ");
+    press("+");
+    expectOutput("2 + ");
 
-    wrapper.find("RoundButton[text='3']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("2 + 3");
+    press("3");
+    expectOutput("2 + 3");
 
-    wrapper.find("RoundButton[text='=']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("5");
+    press("=");
+    expectOutput("5");
   });
 
   it("solves a complex equation", () => {
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("");
+    // -0.1 * 7 / 2 = -0.35
+    expectOutput("0");
 
-    wrapper.find("RoundButton[text='(-)']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("-");
+    press("(-)");
+    expectOutput("-0");
 
-    wrapper.find("RoundButton[text='0']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("-0");
+    press("0");
+    expectOutput("-0");
 
-    wrapper.find("RoundButton[text='.']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("-0.");
+    press(".");
+    expectOutput("-0.");
 
-    wrapper.find("RoundButton[text='1']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe("-0.1");
+    press("1");
+    expectOutput("-0.1");
 
-    wrapper.find("RoundButton[text='*']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe(
-      "-0.1 * "
-    );
+    press("*");
+    expectOutput("-0.1 * ");
 
-    wrapper.find("RoundButton[text='7']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe(
-      "-0.1 * 7"
-    );
+    press("7");
+    expectOutput("-0.1 * 7");
 
-    wrapper.find("RoundButton[text='=']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe(
-      "-0.7000000000000001"
-    );
+    press("/");
+    expectOutput("-0.7000000000000001 / ");
 
-    wrapper.find("RoundButton[text='/']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe(
-      "-0.7000000000000001 / "
-    );
+    press("2");
+    expectOutput("-0.7000000000000001 / 2");
 
-    wrapper.find("RoundButton[text='2']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe(
-      "-0.7000000000000001 / 2"
-    );
+    press("=");
+    expectOutput("-0.35000000000000003");
+  });
 
-    wrapper.find("RoundButton[text='=']").simulate("press");
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe(
-      "-0.35000000000000003"
-    );
+  it("solves a weird equation", () => {
+    // 0 ^ 0 = 1, 1 / -0 = -infinity, -infinity % 0 = NaN
+    expectOutput("0");
+
+    press("^");
+    expectOutput("0 ^ ");
+
+    press("0");
+    expectOutput("0 ^ 0");
+
+    press("/");
+    expectOutput("1 / ");
+
+    press("(-)");
+    expectOutput("1 / -");
+
+    press("0");
+    expectOutput("1 / -0");
+
+    press("%");
+    expectOutput("-Infinity % ");
+
+    press("0");
+    expectOutput("-Infinity % 0");
+
+    press("(-)");
+    expectOutput("-Infinity % -0");
+
+    press("(-)");
+    expectOutput("-Infinity % 0");
+
+    press("=");
+    expectOutput("NaN");
+  });
+
+  it("solves no equation", () => {
+    // -1 ^ 0.5
+    expectOutput("0");
+
+    press("1");
+    expectOutput("1");
+
+    press("(-)");
+    expectOutput("-1");
+
+    press("^");
+    expectOutput("-1 ^ ");
+
+    press("0");
+    expectOutput("-1 ^ 0");
+
+    press(".");
+    expectOutput("-1 ^ 0.");
+
+    press("5");
+    expectOutput("-1 ^ 0.5");
+
+    press("↩︎");
+    expectOutput("-1 ^ 0.");
+
+    press("↩︎");
+    expectOutput("-1 ^ 0");
+
+    press("↩︎");
+    expectOutput("-1 ^ ");
+
+    press("↩︎");
+    expectOutput("-1");
+
+    press("↩︎");
+    expectOutput("-");
+
+    press("↩︎");
+    expectOutput("0");
   });
 });
