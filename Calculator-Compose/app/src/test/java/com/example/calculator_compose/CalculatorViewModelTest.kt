@@ -25,7 +25,7 @@ class CalculatorViewModelTest {
     @Test
     fun addNumber_Decimal() {
         sut.addNumber('3')
-        sut.addNumber('.')
+        sut.addDecimal()
         sut.addNumber('1')
         sut.addNumber('4')
 

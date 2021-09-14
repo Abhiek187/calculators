@@ -50,7 +50,7 @@ class Calculator_SwiftUITests: XCTestCase {
     func testAddNumber_Decimal() {
         inspectWrapper { sut in
             sut.addNumber(key: "3")
-            sut.addNumber(key: ".")
+            sut.addDecimal()
             sut.addNumber(key: "1")
             sut.addNumber(key: "4")
 
