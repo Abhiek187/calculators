@@ -12,19 +12,33 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  double num1 = 0;
+  double num1 = 0.0;
   String op = '';
-  String numStr = '';
-  String output = '';
+  String numStr = '0';
+  String output = '0';
 
   void clearOutput() {
-    numStr = '';
+    numStr = '0';
     num1 = 0.0;
     op = '';
   }
 
   void addNumber(String key) {
-    numStr += key;
+    // Replace a 0 with the number
+    if (numStr == '0') {
+      numStr = key;
+    } else if (numStr == '-0') {
+      numStr = '-$key';
+    } else {
+      numStr += key;
+    }
+  }
+
+  void addDecimal() {
+    // Don't add another decimal point if the number already contains one
+    if (!numStr.contains('.')) {
+      numStr += '.';
+    }
   }
 
   void addOperator(String key) {
@@ -37,6 +51,21 @@ class _CalculatorState extends State<Calculator> {
 
   void invertNumber() {
     numStr = numStr.startsWith('-') ? numStr.substring(1) : '-$numStr';
+  }
+
+  void backspace() {
+    if (numStr.isNotEmpty) {
+      numStr = numStr.substring(0, numStr.length - 1);
+
+      if (numStr.isEmpty) {
+        numStr = '0'; // show 0 when there's no text
+      }
+    } else if (op.isNotEmpty) {
+      // Undo addOperator after deleting an operator
+      numStr = num1.toString();
+      num1 = 0.0;
+      op = '';
+    }
   }
 
   void evaluate() {
@@ -70,6 +99,35 @@ class _CalculatorState extends State<Calculator> {
     num1 = result;
     numStr = result.toString();
     op = '';
+  }
+
+  // _ = private
+  void _opButtonPressed(String key) {
+    // Simplify the left side of the expression before chaining additional operators
+    evaluate();
+
+    double? num = double.tryParse(numStr);
+    if (num != null) {
+      setState(() {
+        output = numStr;
+        addOperator(key);
+        output += " $key ";
+      });
+    }
+  }
+
+  void _numButtonPressed(String key) {
+    addNumber(key);
+
+    setState(() {
+      if (output == '0') {
+        output = key;
+      } else if (output == '-0') {
+        output = '-$key';
+      } else {
+        output += key;
+      }
+    });
   }
 
   @override
@@ -107,8 +165,7 @@ class _CalculatorState extends State<Calculator> {
                         color: Colors.black,
                         text: '^',
                         onPress: () {
-                          addOperator('^');
-                          setState(() => output += ' ^ ');
+                          _opButtonPressed('^');
                         },
                       ),
                       RoundButton(
@@ -117,16 +174,32 @@ class _CalculatorState extends State<Calculator> {
                         onPress: null,
                       ),
                       RoundButton(
-                        color: Colors.black,
-                        text: 'ln',
-                        onPress: null,
+                        color: Colors.red,
+                        text: '↩',
+                        onPress: () {
+                          backspace();
+
+                          if (output.isNotEmpty) {
+                            setState(() {
+                              if (output.characters.last == ' ') {
+                                output = output.substring(0, output.length - 3);
+                              } else {
+                                output = output.substring(0, output.length - 1);
+                              }
+
+                              if (output.isEmpty) {
+                                output = '0';
+                              }
+                            });
+                          }
+                        },
                       ),
                       RoundButton(
                         color: Colors.red,
                         text: 'clear',
                         onPress: () {
                           clearOutput();
-                          setState(() => output = '');
+                          setState(() => output = '0');
                         },
                       ),
                     ],
@@ -151,16 +224,14 @@ class _CalculatorState extends State<Calculator> {
                         color: Colors.green,
                         text: '%',
                         onPress: () {
-                          addOperator('%');
-                          setState(() => output += ' % ');
+                          _opButtonPressed('%');
                         },
                       ),
                       RoundButton(
                         color: Colors.green,
                         text: '/',
                         onPress: () {
-                          addOperator('/');
-                          setState(() => output += ' / ');
+                          _opButtonPressed('/');
                         },
                       ),
                     ],
@@ -175,32 +246,28 @@ class _CalculatorState extends State<Calculator> {
                         color: Colors.orange,
                         text: '7',
                         onPress: () {
-                          addNumber('7');
-                          setState(() => output += '7');
+                          _numButtonPressed('7');
                         },
                       ),
                       RoundButton(
                         color: Colors.orange,
                         text: '8',
                         onPress: () {
-                          addNumber('8');
-                          setState(() => output += '8');
+                          _numButtonPressed('8');
                         },
                       ),
                       RoundButton(
                         color: Colors.orange,
                         text: '9',
                         onPress: () {
-                          addNumber('9');
-                          setState(() => output += '9');
+                          _numButtonPressed('9');
                         },
                       ),
                       RoundButton(
                         color: Colors.green,
                         text: '*',
                         onPress: () {
-                          addOperator('*');
-                          setState(() => output += ' * ');
+                          _opButtonPressed('*');
                         },
                       ),
                     ],
@@ -215,32 +282,28 @@ class _CalculatorState extends State<Calculator> {
                         color: Colors.orange,
                         text: '4',
                         onPress: () {
-                          addNumber('4');
-                          setState(() => output += '4');
+                          _numButtonPressed('4');
                         },
                       ),
                       RoundButton(
                         color: Colors.orange,
                         text: '5',
                         onPress: () {
-                          addNumber('5');
-                          setState(() => output += '5');
+                          _numButtonPressed('5');
                         },
                       ),
                       RoundButton(
                         color: Colors.orange,
                         text: '6',
                         onPress: () {
-                          addNumber('6');
-                          setState(() => output += '6');
+                          _numButtonPressed('6');
                         },
                       ),
                       RoundButton(
                         color: Colors.green,
                         text: '-',
                         onPress: () {
-                          addOperator('-');
-                          setState(() => output += ' - ');
+                          _opButtonPressed('-');
                         },
                       ),
                     ],
@@ -255,32 +318,28 @@ class _CalculatorState extends State<Calculator> {
                         color: Colors.orange,
                         text: '1',
                         onPress: () {
-                          addNumber('1');
-                          setState(() => output += '1');
+                          _numButtonPressed('1');
                         },
                       ),
                       RoundButton(
                         color: Colors.orange,
                         text: '2',
                         onPress: () {
-                          addNumber('2');
-                          setState(() => output += '2');
+                          _numButtonPressed('2');
                         },
                       ),
                       RoundButton(
                         color: Colors.orange,
                         text: '3',
                         onPress: () {
-                          addNumber('3');
-                          setState(() => output += '3');
+                          _numButtonPressed('3');
                         },
                       ),
                       RoundButton(
                         color: Colors.green,
                         text: '+',
                         onPress: () {
-                          addOperator('+');
-                          setState(() => output += ' + ');
+                          _opButtonPressed('+');
                         },
                       ),
                     ],
@@ -295,16 +354,17 @@ class _CalculatorState extends State<Calculator> {
                         color: Colors.orange,
                         text: '0',
                         onPress: () {
-                          addNumber('0');
-                          setState(() => output += '0');
+                          _numButtonPressed('0');
                         },
                       ),
                       RoundButton(
                         color: Colors.black,
                         text: '.',
                         onPress: () {
-                          addNumber('.');
-                          setState(() => output += '.');
+                          if (!numStr.contains('.')) {
+                            addDecimal();
+                            setState(() => output += '.');
+                          }
                         },
                       ),
                       RoundButton(
@@ -312,7 +372,14 @@ class _CalculatorState extends State<Calculator> {
                         text: '(-)',
                         onPress: () {
                           invertNumber();
-                          setState(() => output = numStr);
+                          setState(() {
+                            if (op.isNotEmpty) {
+                              // Negate the right side of the expression
+                              output = "$num1 $op $numStr";
+                            } else {
+                              output = numStr;
+                            }
+                          });
                         },
                       ),
                       RoundButton(
@@ -320,7 +387,10 @@ class _CalculatorState extends State<Calculator> {
                         text: '=',
                         onPress: () {
                           evaluate();
-                          setState(() => output = numStr);
+
+                          if (numStr.isNotEmpty) {
+                            setState(() => output = numStr);
+                          }
                         },
                       ),
                     ],

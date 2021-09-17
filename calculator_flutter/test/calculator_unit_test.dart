@@ -20,11 +20,21 @@ void main() {
 
     test('with decimals', () {
       sut.addNumber('3');
-      sut.addNumber('.');
+      sut.addDecimal();
       sut.addNumber('1');
       sut.addNumber('4');
 
       expect(sut.numStr, '3.14');
+    });
+
+    test('with multiple decimals', () {
+      sut.addNumber('8');
+      sut.addDecimal();
+      sut.addDecimal();
+      sut.addNumber('0');
+      sut.addDecimal();
+
+      expect(sut.numStr, '8.0');
     });
   });
 
@@ -39,11 +49,11 @@ void main() {
       expect(sut.numStr.isEmpty, true);
     });
 
-    test('with invalid numbers', () {
+    test('with no numbers', () {
       sut.addOperator('+');
 
       expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
-      expect(sut.op.isEmpty, true);
+      expect(sut.op, '+');
       expect(sut.numStr.isEmpty, true);
     });
   });
@@ -52,7 +62,7 @@ void main() {
     test('empty', () {
       sut.invertNumber();
 
-      expect(sut.numStr, '-');
+      expect(sut.numStr, '-0');
     });
 
     test('once', () {
@@ -70,6 +80,56 @@ void main() {
       sut.invertNumber();
 
       expect(sut.numStr, '54');
+    });
+  });
+
+  group('Backspace', () {
+    test('empty', () {
+      sut.backspace();
+
+      expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
+      expect(sut.op.isEmpty, true);
+      expect(sut.numStr, '0');
+    });
+
+    test('single number', () {
+      sut.addNumber('9');
+      sut.backspace();
+
+      expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
+      expect(sut.op.isEmpty, true);
+      expect(sut.numStr, '0');
+    });
+
+    test('two numbers', () {
+      sut.addNumber('7');
+      sut.addNumber('8');
+      sut.backspace();
+
+      expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
+      expect(sut.op.isEmpty, true);
+      expect(sut.numStr, '7');
+    });
+
+    test('operator', () {
+      sut.addNumber('0');
+      sut.addOperator('/');
+      sut.backspace();
+
+      expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
+      expect(sut.op.isEmpty, true);
+      expect(sut.numStr, '0.0');
+    });
+
+    test('second number', () {
+      sut.addNumber('2');
+      sut.addOperator('^');
+      sut.addNumber('8');
+      sut.backspace();
+
+      expect(sut.num1, closeTo(2.0, precisionErrorTolerance));
+      expect(sut.op, '^');
+      expect(sut.numStr, '0');
     });
   });
 
@@ -146,7 +206,7 @@ void main() {
 
       expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
       expect(sut.op.isEmpty, true);
-      expect(sut.numStr.isEmpty, true);
+      expect(sut.numStr, '0.0');
     });
 
     test('missing operator', () {
@@ -173,7 +233,7 @@ void main() {
     test('empty', () {
       sut.clearOutput();
 
-      expect(sut.numStr.isEmpty, true);
+      expect(sut.numStr, '0');
       expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
       expect(sut.op.isEmpty, true);
     });
@@ -182,7 +242,7 @@ void main() {
       sut.addNumber('6');
       sut.clearOutput();
 
-      expect(sut.numStr.isEmpty, true);
+      expect(sut.numStr, '0');
       expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
       expect(sut.op.isEmpty, true);
     });
@@ -192,7 +252,7 @@ void main() {
       sut.addNumber('/');
       sut.clearOutput();
 
-      expect(sut.numStr.isEmpty, true);
+      expect(sut.numStr, '0');
       expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
       expect(sut.op.isEmpty, true);
     });
@@ -203,7 +263,7 @@ void main() {
       sut.addNumber('6');
       sut.clearOutput();
 
-      expect(sut.numStr.isEmpty, true);
+      expect(sut.numStr, '0');
       expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
       expect(sut.op.isEmpty, true);
     });
@@ -215,7 +275,7 @@ void main() {
       sut.evaluate();
       sut.clearOutput();
 
-      expect(sut.numStr.isEmpty, true);
+      expect(sut.numStr, '0');
       expect(sut.num1, closeTo(0.0, precisionErrorTolerance));
       expect(sut.op.isEmpty, true);
     });
