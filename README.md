@@ -1,6 +1,6 @@
 # Calculators
 
-![Demo of the calculator](recording.gif)
+![Demo of the calculator](demo.gif)
 
 These are simple calculator apps designed for all web and mobile devices using a variety of app development tools. It's a showcase for how the same logic can apply to multiple development environments and how to write unit and UI tests on all these platforms.
 
