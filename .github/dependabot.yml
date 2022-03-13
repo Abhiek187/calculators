@@ -12,3 +12,8 @@ updates:
     ignore:
       # Ignore updates to react-native since they're tied to an expo version
       - dependency-name: "react-native"
+  
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
