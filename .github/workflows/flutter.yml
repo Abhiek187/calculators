@@ -33,4 +33,5 @@ jobs:
     # package:test for this step to succeed. Note that Flutter projects will
     # want to change this to 'flutter test'.
     - name: Run tests
-      run: flutter test
+      # Don't test widget_test.dart
+      run: flutter test test/calculator_unit_test.dart test/calculator_widget_test.dart
