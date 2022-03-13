@@ -47,6 +47,7 @@ jobs:
           xcodebuild build-for-testing -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
       
       # Similar to the Build step, but run the test-without-building command
+      # To filter tests, use -only-testing and -skip-testing, to suppress output, use -quiet
       - name: Test
         env:
           scheme: ${{ 'default' }}
