@@ -10,9 +10,14 @@ jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: macos-latest
+    
+    strategy:
+      matrix:
+        dir: ['./Calculator-Storyboard', './Calculator-SwiftUI']
+    
     defaults:
       run:
-        working-directory: ./Calculator-Storyboard
+        working-directory: ${{ matrix.dir }}
 
     steps:
       - name: Checkout
