@@ -9,11 +9,12 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-latest # to take advantage of hardware acceleration
     
     strategy:
       matrix:
         dir: ['./Calculator-View', './Calculator-Compose']
+        api-level: [27, 29, 31]
     
     defaults:
       run:
@@ -30,5 +31,13 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+
     - name: Run unit tests
       run: ./gradlew test
+
+    - name: Run instrumentation tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: ${{ matrix.api-level }}
+        arch: x86_64
+        script: ./gradlew connectedCheck
