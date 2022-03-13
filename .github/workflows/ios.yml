@@ -10,13 +10,15 @@ jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./Calculator-Storyboard
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set Default Scheme
         run: |
-          cd Calculator-Storyboard/
           scheme_list=$(xcodebuild -list -json | tr -d "\n")
           default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
           echo $default | cat >default
