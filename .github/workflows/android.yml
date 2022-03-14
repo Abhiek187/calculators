@@ -45,8 +45,8 @@ jobs:
 
     # The test results are shown as a webpage instead of on the command line
     - name: Upload Reports
-    uses: actions/upload-artifact@v1
-    with:
-      name: reports
-      path: ${{ matrix.dir }}/app/build/reports
+      uses: actions/upload-artifact@v1
+      with:
+        name: reports
+        path: ${{ matrix.dir }}/app/build/reports
 
