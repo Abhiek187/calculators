@@ -49,6 +49,6 @@ jobs:
       if: always() # show reports even if the previous steps fail
       uses: actions/upload-artifact@v1
       with:
-        name: reports
+        name: reports-${{ matrix.dir }}-${{ matrix.api-level }}
         path: ${{ matrix.dir }}/app/build/reports
 
