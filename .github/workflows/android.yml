@@ -42,3 +42,11 @@ jobs:
         arch: x86_64
         working-directory: ${{ matrix.dir }}
         script: ./gradlew connectedCheck
+
+    # The test results are shown as a webpage instead of on the command line
+    - name: Upload Reports
+    uses: actions/upload-artifact@v1
+    with:
+      name: reports
+      path: ${{ matrix.dir }}/app/build/reports
+
