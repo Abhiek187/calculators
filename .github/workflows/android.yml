@@ -12,6 +12,7 @@ jobs:
     runs-on: macos-latest # to take advantage of hardware acceleration
     
     strategy:
+      fail-fast: false
       matrix:
         dir: ['./Calculator-View', './Calculator-Compose']
         api-level: [27, 29, 31]
