@@ -49,6 +49,7 @@ jobs:
       if: always() # show reports even if the previous steps fail
       uses: actions/upload-artifact@v1
       with:
-        name: reports-${{ matrix.dir }}-${{ matrix.api-level }}
+        # Ideally this should indicate whether this is View or Compose, but the job index is the next best thing
+        name: reports-${{ matrix.api-level }}-${{ strategy.job-index }}
         path: ${{ matrix.dir }}/app/build/reports
 
