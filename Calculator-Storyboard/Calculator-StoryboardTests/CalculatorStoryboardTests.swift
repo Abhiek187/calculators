@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator_Storyboard
 
-class Calculator_StoryboardTests: XCTestCase {
+class CalculatorStoryboardTests: XCTestCase {
     var sut: ViewController! // system under test
 
     override func setUpWithError() throws {
@@ -22,7 +22,7 @@ class Calculator_StoryboardTests: XCTestCase {
         sut = nil
         try super.tearDownWithError()
     }
-    
+
     func testAddNumber_Integer() {
         sut.addNumber(key: "7")
         sut.addNumber(key: "2")
@@ -30,7 +30,7 @@ class Calculator_StoryboardTests: XCTestCase {
 
         XCTAssertEqual(sut.numStr, "729")
     }
-    
+
     func testAddNumber_Decimal() {
         sut.addNumber(key: "3")
         sut.addDecimal()
@@ -39,17 +39,17 @@ class Calculator_StoryboardTests: XCTestCase {
 
         XCTAssertEqual(sut.numStr, "3.14")
     }
-    
+
     func testAddNumber_MultipleDecimals() {
         sut.addNumber(key: "8")
         sut.addDecimal()
         sut.addDecimal()
         sut.addNumber(key: "0")
         sut.addDecimal()
-        
+
         XCTAssertEqual(sut.numStr, "8.0")
     }
-    
+
     func testAddOperator_Valid() {
         sut.addNumber(key: "2")
         sut.addNumber(key: "1")
@@ -59,7 +59,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertEqual(sut.op, "%")
         XCTAssertTrue(sut.numStr.isEmpty)
     }
-    
+
     func testAddOperator_Empty() {
         sut.addOperator(key: "+")
 
@@ -67,13 +67,13 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertEqual(sut.op, "+")
         XCTAssertTrue(sut.numStr.isEmpty)
     }
-    
+
     func testInvertNumber_Empty() {
         sut.invertNumber()
 
         XCTAssertEqual(sut.numStr, "-0")
     }
-    
+
     func testInvertNumber_Once() {
         sut.addNumber(key: "5")
         sut.addNumber(key: "4")
@@ -81,7 +81,7 @@ class Calculator_StoryboardTests: XCTestCase {
 
         XCTAssertEqual(sut.numStr, "-54")
     }
-    
+
     func testInvertNumber_Twice() {
         sut.addNumber(key: "5")
         sut.invertNumber()
@@ -90,55 +90,55 @@ class Calculator_StoryboardTests: XCTestCase {
 
         XCTAssertEqual(sut.numStr, "54")
     }
-    
+
     func testBackspace_Empty() {
         sut.backspace()
-        
+
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "0")
     }
-    
+
     func testBackspace_SingleNum() {
         sut.addNumber(key: "9")
         sut.backspace()
-        
+
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "0")
     }
-    
+
     func testBackspace_DoubleNum() {
         sut.addNumber(key: "7")
         sut.addNumber(key: "8")
         sut.backspace()
-        
+
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "7")
     }
-    
+
     func testBackspace_Operator() {
         sut.addNumber(key: "0")
         sut.addOperator(key: "/")
         sut.backspace()
-        
+
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "0.0")
     }
-    
+
     func testBackspace_SecondNum() {
         sut.addNumber(key: "2")
         sut.addOperator(key: "^")
         sut.addNumber(key: "8")
         sut.backspace()
-        
+
         XCTAssertEqual(sut.num1, 2.0, accuracy: Double.ulpOfOne)
         XCTAssertEqual(sut.op, "^")
         XCTAssertEqual(sut.numStr, "0")
     }
-    
+
     func testEvaluate_ValidAdd() {
         sut.addNumber(key: "2")
         sut.addOperator(key: "+")
@@ -149,7 +149,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "5.0")
     }
-    
+
     func testEvaluate_ValidSubtract() {
         sut.addNumber(key: "2")
         sut.addOperator(key: "-")
@@ -171,7 +171,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "6.0")
     }
-    
+
     func testEvaluate_ValidDivide() {
         sut.addNumber(key: "2")
         sut.addOperator(key: "/")
@@ -194,7 +194,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "2.0")
     }
-    
+
     func testEvaluate_ValidExp() {
         sut.addNumber(key: "2")
         sut.addOperator(key: "^")
@@ -205,7 +205,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "8.0")
     }
-    
+
     func testEvaluate_MissingFirstNum() {
         sut.evaluate()
 
@@ -213,7 +213,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "0.0")
     }
-    
+
     func testEvaluate_MissingOperator() {
         sut.addNumber(key: "2")
         sut.evaluate()
@@ -222,7 +222,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertTrue(sut.op.isEmpty)
         XCTAssertEqual(sut.numStr, "2.0")
     }
-    
+
     func testEvaluate_MissingSecondNum() {
         sut.addNumber(key: "2")
         sut.addOperator(key: "^")
@@ -232,7 +232,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertEqual(sut.op, "^")
         XCTAssertTrue(sut.numStr.isEmpty)
     }
-    
+
     func testClearOutput_Empty() {
         sut.clearOutput()
 
@@ -240,7 +240,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
     }
-    
+
     func testClearOutput_AfterFirstNum() {
         sut.addNumber(key: "6")
         sut.clearOutput()
@@ -249,7 +249,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
     }
-    
+
     func testClearOutput_AfterOperator() {
         sut.addNumber(key: "6")
         sut.addOperator(key: "/")
@@ -259,7 +259,7 @@ class Calculator_StoryboardTests: XCTestCase {
         XCTAssertEqual(sut.num1, 0.0, accuracy: Double.ulpOfOne)
         XCTAssertTrue(sut.op.isEmpty)
     }
-    
+
     func testClearOutput_AfterSecondNum() {
         sut.addNumber(key: "6")
         sut.addOperator(key: "/")
