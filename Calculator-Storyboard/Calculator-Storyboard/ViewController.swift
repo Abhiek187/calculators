@@ -43,6 +43,7 @@ class ViewController: UIViewController {
 
     // MARK: Local Variables
     var num1 = 0.0
+    // swiftlint:disable identifier_name
     var op = ""
     var numStr = "0"
 

@@ -11,8 +11,8 @@
 		25565A962656C078009FE7A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25565A952656C078009FE7A4 /* ContentView.swift */; };
 		25565A982656C079009FE7A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25565A972656C079009FE7A4 /* Assets.xcassets */; };
 		25565A9B2656C079009FE7A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25565A9A2656C079009FE7A4 /* Preview Assets.xcassets */; };
-		25565AA62656C07A009FE7A4 /* Calculator_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25565AA52656C07A009FE7A4 /* Calculator_SwiftUITests.swift */; };
-		25565AB12656C07A009FE7A4 /* Calculator_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25565AB02656C07A009FE7A4 /* Calculator_SwiftUIUITests.swift */; };
+		25565AA62656C07A009FE7A4 /* CalculatorSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25565AA52656C07A009FE7A4 /* CalculatorSwiftUITests.swift */; };
+		25565AB12656C07A009FE7A4 /* CalculatorSwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25565AB02656C07A009FE7A4 /* CalculatorSwiftUIUITests.swift */; };
 		F16A719126E45AA80079E7C3 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = F16A719026E45AA80079E7C3 /* ViewInspector */; };
 /* End PBXBuildFile section */
 
@@ -41,10 +41,10 @@
 		25565A9A2656C079009FE7A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		25565A9C2656C079009FE7A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25565AA12656C07A009FE7A4 /* Calculator-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Calculator-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		25565AA52656C07A009FE7A4 /* Calculator_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator_SwiftUITests.swift; sourceTree = "<group>"; };
+		25565AA52656C07A009FE7A4 /* CalculatorSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorSwiftUITests.swift; sourceTree = "<group>"; };
 		25565AA72656C07A009FE7A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25565AAC2656C07A009FE7A4 /* Calculator-SwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Calculator-SwiftUIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		25565AB02656C07A009FE7A4 /* Calculator_SwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator_SwiftUIUITests.swift; sourceTree = "<group>"; };
+		25565AB02656C07A009FE7A4 /* CalculatorSwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorSwiftUIUITests.swift; sourceTree = "<group>"; };
 		25565AB22656C07A009FE7A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,7 +118,7 @@
 		25565AA42656C07A009FE7A4 /* Calculator-SwiftUITests */ = {
 			isa = PBXGroup;
 			children = (
-				25565AA52656C07A009FE7A4 /* Calculator_SwiftUITests.swift */,
+				25565AA52656C07A009FE7A4 /* CalculatorSwiftUITests.swift */,
 				25565AA72656C07A009FE7A4 /* Info.plist */,
 			);
 			path = "Calculator-SwiftUITests";
@@ -127,7 +127,7 @@
 		25565AAF2656C07A009FE7A4 /* Calculator-SwiftUIUITests */ = {
 			isa = PBXGroup;
 			children = (
-				25565AB02656C07A009FE7A4 /* Calculator_SwiftUIUITests.swift */,
+				25565AB02656C07A009FE7A4 /* CalculatorSwiftUIUITests.swift */,
 				25565AB22656C07A009FE7A4 /* Info.plist */,
 			);
 			path = "Calculator-SwiftUIUITests";
@@ -150,6 +150,7 @@
 				25565A8C2656C078009FE7A4 /* Sources */,
 				25565A8D2656C078009FE7A4 /* Frameworks */,
 				25565A8E2656C078009FE7A4 /* Resources */,
+				F1C4029427F0EA65007D2727 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -272,6 +273,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F1C4029427F0EA65007D2727 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		25565A8C2656C078009FE7A4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -286,7 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25565AA62656C07A009FE7A4 /* Calculator_SwiftUITests.swift in Sources */,
+				25565AA62656C07A009FE7A4 /* CalculatorSwiftUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25565AB12656C07A009FE7A4 /* Calculator_SwiftUIUITests.swift in Sources */,
+				25565AB12656C07A009FE7A4 /* CalculatorSwiftUIUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

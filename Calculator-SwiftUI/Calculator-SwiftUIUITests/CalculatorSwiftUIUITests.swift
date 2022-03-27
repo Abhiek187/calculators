@@ -7,7 +7,7 @@
 
 import XCTest
 
-class Calculator_SwiftUIUITests: XCTestCase {
+class CalculatorSwiftUIUITests: XCTestCase {
     var app: XCUIApplication!
 
     override func setUpWithError() throws {
@@ -17,7 +17,8 @@ class Calculator_SwiftUIUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        // In UI tests it’s important to set the initial state - such as interface orientation
+        // - required for your tests before they run. The setUp method is a good place to do this.
         app = XCUIApplication()
         app.launch()
     }
@@ -27,7 +28,7 @@ class Calculator_SwiftUIUITests: XCTestCase {
         app = nil
         try super.tearDownWithError()
     }
-    
+
     func testSimpleEquation() {
         // 2 + 3 = 5
         let labelOutput = app.staticTexts.firstMatch
@@ -35,7 +36,7 @@ class Calculator_SwiftUIUITests: XCTestCase {
         let buttonPlus = app.buttons["+"]
         let button3 = app.buttons["3"]
         let buttonEquals = app.buttons["="]
-        
+
         XCTAssertEqual(labelOutput.label, "0")
         button2.tap()
         XCTAssertEqual(labelOutput.label, "2")
@@ -59,7 +60,7 @@ class Calculator_SwiftUIUITests: XCTestCase {
         let buttonEquals = app.buttons["="]
         let buttonDivide = app.buttons["/"]
         let button2 = app.buttons["2"]
-        
+
         XCTAssertEqual(labelOutput.label, "0")
         buttonNegative.tap()
         XCTAssertEqual(labelOutput.label, "-0")
@@ -80,7 +81,7 @@ class Calculator_SwiftUIUITests: XCTestCase {
         buttonEquals.tap()
         XCTAssertEqual(labelOutput.label, "-0.35000000000000003")
     }
-    
+
     func testWeirdEquation() {
         // 0 ^ 0 = 1, 1 / -0 = -infinity, -infinity % 0 = NaN
         let labelOutput = app.staticTexts.firstMatch
@@ -113,7 +114,7 @@ class Calculator_SwiftUIUITests: XCTestCase {
         buttonEquals.tap()
         XCTAssertEqual(labelOutput.label, "nan")
     }
-    
+
     func testNoEquation() {
         // -1 ^ 0.5
         let labelOutput = app.staticTexts.firstMatch

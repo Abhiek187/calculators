@@ -11,7 +11,8 @@ import XCTest
 
 extension ContentView: Inspectable {}
 
-class Calculator_SwiftUITests: XCTestCase {
+// swiftlint:disable type_body_length
+class CalculatorSwiftUITests: XCTestCase {
     var contentView: ContentView! // system under test
 
     override func setUpWithError() throws {
@@ -25,17 +26,17 @@ class Calculator_SwiftUITests: XCTestCase {
         contentView = nil
         try super.tearDownWithError()
     }
-    
+
     func inspectWrapper(testBlock: @escaping (ContentView) -> Void) {
         let exp = contentView.on(\.didAppear) { view in
             let sut = try view.actualView()
             testBlock(sut) // code block for testing
         }
-        
+
         ViewHosting.host(view: contentView)
         wait(for: [exp], timeout: 0.1)
     }
-    
+
     func testAddNumber_Integer() {
         inspectWrapper { sut in
             sut.addNumber(key: "7")
@@ -46,7 +47,7 @@ class Calculator_SwiftUITests: XCTestCase {
             XCTAssertEqual(sut.output, "729")
         }
     }
-    
+
     func testAddNumber_Decimal() {
         inspectWrapper { sut in
             sut.addNumber(key: "3")
@@ -58,7 +59,7 @@ class Calculator_SwiftUITests: XCTestCase {
             XCTAssertEqual(sut.output, "3.14")
         }
     }
-    
+
     func testAddNumber_MultipleDecimals() {
         inspectWrapper { sut in
             sut.addNumber(key: "8")
@@ -127,7 +128,7 @@ class Calculator_SwiftUITests: XCTestCase {
             XCTAssertEqual(sut.output, "54")
         }
     }
-    
+
     func testBackspace_Empty() {
         inspectWrapper { sut in
             sut.backspace()

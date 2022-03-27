@@ -8,6 +8,7 @@
 import SwiftUI
 
 @main
+// swiftlint:disable type_name
 struct Calculator_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
