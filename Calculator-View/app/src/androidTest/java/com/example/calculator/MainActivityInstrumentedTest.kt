@@ -1,32 +1,22 @@
 package com.example.calculator
 
-import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import org.junit.After
-import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class MainActivityInstrumentedTest {
-    private lateinit var activityScenario: ActivityScenario<MainActivity>
-
-    @Before
-    fun init() {
-        activityScenario = ActivityScenario.launch(MainActivity::class.java)
-    }
-
-    @After
-    fun reset() {
-        activityScenario.close()
-    }
+    @get:Rule
+    val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
     fun simpleEquation() {
