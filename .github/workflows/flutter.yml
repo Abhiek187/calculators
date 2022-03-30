@@ -8,8 +8,14 @@ name: Flutter CI
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'calculator_flutter/**'
+      - '.github/workflows/flutter.yml'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'calculator_flutter/**'
+      - '.github/workflows/flutter.yml'
 
 jobs:
   build:
