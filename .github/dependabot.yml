@@ -10,9 +10,20 @@ updates:
     schedule:
       interval: "monthly"
     ignore:
-      # Ignore updates to react-native since they're tied to an expo version
+      # Ignore updates to the following libraries since they're updated or tied with expo
+      - dependency-name: "@babel/core"
+      - dependency-name: "@types/react"
+      - dependency-name: "@types/react-native"
+      - dependency-name: "expo"
+      - dependency-name: "expo-status-bar"
+      - dependency-name: "jest-expo"
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
       - dependency-name: "react-native"
-  
+      - dependency-name: "react-native-web"
+      - dependency-name: "react-test-renderer"
+      - dependency-name: "typescript"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
