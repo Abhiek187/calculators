@@ -10,8 +10,18 @@ updates:
     schedule:
       interval: "monthly"
     ignore:
-      # Ignore updates to react-native since they're tied to an expo version
+      # Ignore updates to expo-status-bar, jest-expo, react-native, react, react-dom, typescript, @babel/core, @types/react, react-native-web, @types/react-native, and expo since they're updated using `expo upgrade`
+      - dependency-name: "@babel/core"
+      - dependency-name: "@types/react"
+      - dependency-name: "@types/react-native"
+      - dependency-name: "expo"
+      - dependency-name: "expo-status-bar"
+      - dependency-name: "jest-expo"
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
       - dependency-name: "react-native"
+      - dependency-name: "react-native-web"
+      - dependency-name: "typescript"
   
   - package-ecosystem: "github-actions"
     directory: "/"
