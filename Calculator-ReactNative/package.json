@@ -25,7 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/preset-typescript": "^7.12.17",
-    "@types/enzyme": "^3.10.8",
+    "@types/enzyme": "^3.10.12",
     "@types/jest": "^27.4.1",
     "@types/react": "~17.0.40",
     "@types/react-native": "~0.67.2",
