@@ -4,6 +4,7 @@
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
+enable-beta-ecosystems: true # Remove once pub is out of beta
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/Calculator-ReactNative" # Location of package manifests
@@ -26,5 +27,10 @@ updates:
 
   - package-ecosystem: "github-actions"
     directory: "/"
+    schedule:
+      interval: "monthly"
+
+  - package-ecosystem: "pub"
+    directory: "/calculator_flutter"
     schedule:
       interval: "monthly"
