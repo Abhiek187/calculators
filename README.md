@@ -5,7 +5,7 @@
 [![Node.js CI](https://github.com/Abhiek187/calculators/actions/workflows/node.js.yml/badge.svg)](https://github.com/Abhiek187/calculators/actions/workflows/node.js.yml)
 [![Flutter CI](https://github.com/Abhiek187/calculators/actions/workflows/flutter.yml/badge.svg)](https://github.com/Abhiek187/calculators/actions/workflows/flutter.yml)
 
-<img src="demo.gif" alt="Demo of the calculator app" width="350px">
+<img src="demo.gif" alt="Demo of the calculator app" width="350">
 
 These are simple calculator apps designed for all web and mobile devices using a variety of app development tools. It's a showcase for how the same logic can apply to multiple development environments and how to write unit and UI tests on all these platforms.
 
