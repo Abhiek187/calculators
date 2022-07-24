@@ -1,23 +1,18 @@
 package com.example.calculator
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var textViewOutput: TextView
     private val calculatorViewModel by viewModels<CalculatorViewModel>() // by = delegated property
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        textViewOutput = binding.textViewOutput
+        val textViewOutput = binding.textViewOutput
 
         calculatorViewModel.output.observe(this) { newOutput ->
             // Update textViewOutput every time the output in the ViewModel changes
@@ -153,7 +148,6 @@ class MainActivity : AppCompatActivity() {
         calculatorViewModel.addOperator(key)
     }
 
-    @SuppressLint("SetTextI18n")
     private fun onTapButtonNum(key: Char) {
         calculatorViewModel.addNumber(key)
     }
