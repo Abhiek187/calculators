@@ -3,18 +3,14 @@ package com.example.calculator
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculator.databinding.ActivityMainBinding
-import kotlin.math.pow
-
 
 class MainActivity : AppCompatActivity() {
-    var num1 = 0.0
-    var op = '\u0000' // null character: \0
-    var numStr = "0" // string to build up a number
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var textViewOutput: TextView
+    private val calculatorViewModel by viewModels<CalculatorViewModel>() // by = delegated property
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +18,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         textViewOutput = binding.textViewOutput
+
+        calculatorViewModel.output.observe(this) { newOutput ->
+            // Update textViewOutput every time the output in the ViewModel changes
+            textViewOutput.text = newOutput
+        }
 
         with (binding) {
             // Implement all the button click listeners
@@ -37,26 +38,12 @@ class MainActivity : AppCompatActivity() {
 
             buttonBackspace.setOnClickListener {
                 // Remove part of the output
-                backspace()
-
-                if (textViewOutput.text.isNotEmpty()) {
-                    if (textViewOutput.text.last() == ' ') {
-                        // Remove the spaces in between the operator
-                        textViewOutput.text = textViewOutput.text.dropLast(3)
-                    } else {
-                        textViewOutput.text = textViewOutput.text.dropLast(1)
-                    }
-
-                    if (textViewOutput.text.isEmpty()) {
-                        textViewOutput.text = "0"
-                    }
-                }
+                calculatorViewModel.backspace()
             }
 
             buttonClear.setOnClickListener {
                 // Clear the output
-                clearOutput()
-                textViewOutput.text = "0"
+                calculatorViewModel.clearOutput()
             }
 
             buttonParenLeft.setOnClickListener {
@@ -146,128 +133,28 @@ class MainActivity : AppCompatActivity() {
 
             buttonDot.setOnClickListener {
                 // Add a decimal point to the number
-                if (!numStr.contains(".")) {
-                    addDecimal()
-                    textViewOutput.append(".")
-                }
+                calculatorViewModel.addDecimal()
             }
 
             buttonNegative.setOnClickListener {
                 // Invert the sign of the number
-                invertNumber()
-
-                if (op != '\u0000') {
-                    // Negate the right side of the expression
-                    textViewOutput.text = "$num1 $op $numStr"
-                } else {
-                    textViewOutput.text = numStr
-                }
+                calculatorViewModel.invertNumber()
             }
 
             buttonEquals.setOnClickListener {
                 // Evaluate the expression
-                evaluate()
-
-                if (numStr.isNotEmpty()) {
-                    textViewOutput.text = numStr
-                }
+                calculatorViewModel.evaluate()
             }
         }
     }
 
     private fun onTapButtonOp(key: Char) {
         // Simplify the left side of the expression before chaining additional operators
-        evaluate()
-
-        numStr.toDoubleOrNull()?.let {
-            textViewOutput.text = numStr
-            addOperator(key)
-            textViewOutput.append(" $key ")
-        }
+        calculatorViewModel.addOperator(key)
     }
 
     @SuppressLint("SetTextI18n")
     private fun onTapButtonNum(key: Char) {
-        addNumber(key)
-
-        when (textViewOutput.text) {
-            "0" -> textViewOutput.text = key.toString()
-            "-0" -> textViewOutput.text = "-$key"
-            else -> textViewOutput.append(key.toString())
-        }
-    }
-
-    fun clearOutput() {
-        numStr = "0"
-        num1 = 0.0
-        op = '\u0000'
-    }
-
-    fun addNumber(key: Char) {
-        // Replace a 0 with the number
-        when (numStr) {
-            "0" -> numStr = key.toString()
-            "-0" -> numStr = "-$key"
-            else -> numStr += key
-        }
-    }
-
-    fun addDecimal() {
-        // Don't add another decimal point if the number already contains one
-        if (!numStr.contains(".")) {
-            numStr += "."
-        }
-    }
-
-    fun addOperator(key: Char) {
-        // Simplify the left side of the expression before chaining additional operators
-        evaluate()
-
-        numStr.toDoubleOrNull()?.let { num ->
-            num1 = num
-            op = key
-            numStr = ""
-        }
-    }
-
-    fun invertNumber() {
-        numStr = if (numStr.startsWith("-")) {
-            numStr.substring(1)
-        } else {
-            "-$numStr"
-        }
-    }
-
-    fun backspace() {
-        if (numStr.isNotEmpty()) {
-            numStr = numStr.dropLast(1)
-
-            if (numStr.isEmpty()) {
-                numStr = "0" // show 0 when there's no text
-            }
-        } else if (op != '\u0000') {
-            // Undo addOperator after deleting an operator
-            numStr = num1.toString()
-            num1 = 0.0
-            op = '\u0000'
-        }
-    }
-
-    fun evaluate() {
-        numStr.toDoubleOrNull()?.let { num2 ->
-            val result = when (op) {
-                '+' -> num1 + num2
-                '-' -> num1 - num2
-                '*' -> num1 * num2
-                '/' -> num1 / num2
-                '%' -> num1 % num2
-                '^' -> num1.pow(num2)
-                else -> num2
-            }
-
-            num1 = result
-            numStr = result.toString()
-            op = '\u0000'
-        }
+        calculatorViewModel.addNumber(key)
     }
 }
