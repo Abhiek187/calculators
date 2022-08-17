@@ -1,15 +1,10 @@
-import { configure, shallow, ShallowWrapper } from "enzyme";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { render, screen, fireEvent } from "@testing-library/react-native";
 import React from "react";
 import Calculator from "./Calculator";
 
-configure({ adapter: new Adapter() });
-
 describe("Calculator", () => {
-  let wrapper: ShallowWrapper;
-
   beforeEach(() => {
-    wrapper = shallow(<Calculator />);
+    render(<Calculator />);
   });
 
   afterEach(() => {
@@ -19,13 +14,14 @@ describe("Calculator", () => {
 
   const press = (buttonText: string) => {
     // Press the button
-    wrapper.find(`RoundButton[text='${buttonText}']`).simulate("press");
+    const button = screen.getByText(buttonText);
+    fireEvent.press(button);
   };
 
   const expectOutput = (expectedOutput: string) => {
     // Check that the output displays the correct string
-    expect(wrapper.find("Text[numberOfLines=2]").render().text()).toBe(
-      expectedOutput
+    expect(screen.getByTestId("output")).toHaveTextContent(
+      expectedOutput.trim()
     );
   };
 

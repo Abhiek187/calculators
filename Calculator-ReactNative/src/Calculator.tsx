@@ -33,6 +33,7 @@ const Calculator: React.FC = () => {
         ]}
         numberOfLines={2}
         ellipsizeMode="tail"
+        testID="output" // make it easier to find this component in tests
       >
         {output}
       </Text>
