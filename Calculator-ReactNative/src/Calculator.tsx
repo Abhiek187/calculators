@@ -181,7 +181,7 @@ const styles: StyleSheet.NamedStyles<any> = StyleSheet.create({
   },
 
   output: {
-    textAlign: "right",
+    textAlign: "end",
     marginLeft: "5%",
     marginRight: "5%",
   },
