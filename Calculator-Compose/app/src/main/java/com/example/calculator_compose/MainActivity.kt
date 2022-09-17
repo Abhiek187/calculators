@@ -1,6 +1,5 @@
 package com.example.calculator_compose
 
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,8 +12,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.calculator_compose.previews.DevicePreviews
+import com.example.calculator_compose.previews.DisplayPreviews
+import com.example.calculator_compose.previews.OrientationPreviews
 import com.example.calculator_compose.ui.theme.CalcColors
 import com.example.calculator_compose.ui.theme.CalculatorComposeTheme
 
@@ -34,9 +35,13 @@ class MainActivity : ComponentActivity() {
                             backgroundColor = MaterialTheme.colors.primary
                         )
                     },
-                    content = {
+                    content = { padding ->
                         // A surface container using the 'background' color from the theme
-                        Surface(color = MaterialTheme.colors.background) {
+                        Surface(
+                            color = MaterialTheme.colors.background,
+                            modifier = Modifier
+                                .padding(padding)
+                        ) {
                             Calculator(calculatorViewModel)
                         }
                     }
@@ -262,10 +267,9 @@ fun Calculator(calculatorViewModel: CalculatorViewModel) {
     }
 }
 
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showSystemUi = true
-)
+@DisplayPreviews
+@OrientationPreviews
+@DevicePreviews
 @Composable
 fun DefaultPreview() {
     CalculatorComposeTheme {
