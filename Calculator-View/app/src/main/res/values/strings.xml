@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Calculator</string>
+    <string name="app_name">Calculator-View</string>
     <string name="exponent">^</string>
 <!--    <string name="pi">&#x1D745;</string>-->
     <string name="pi">\u03C0</string>
