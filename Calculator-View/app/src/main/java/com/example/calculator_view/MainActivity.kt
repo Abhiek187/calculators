@@ -1,9 +1,9 @@
-package com.example.calculator
+package com.example.calculator_view
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.calculator.databinding.ActivityMainBinding
+import com.example.calculator_view.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val calculatorViewModel by viewModels<CalculatorViewModel>() // by = delegated property

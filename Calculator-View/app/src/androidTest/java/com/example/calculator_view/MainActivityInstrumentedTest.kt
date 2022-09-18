@@ -1,4 +1,4 @@
-package com.example.calculator
+package com.example.calculator_view
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click

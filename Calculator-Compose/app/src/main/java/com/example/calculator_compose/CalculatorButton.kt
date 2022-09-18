@@ -1,6 +1,5 @@
 package com.example.calculator_compose
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
@@ -9,8 +8,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.calculator_compose.previews.DisplayPreviews
 import com.example.calculator_compose.ui.theme.CalcColors
 import com.example.calculator_compose.ui.theme.CalculatorComposeTheme
 
@@ -30,15 +29,7 @@ fun CalculatorButton(color: Color, text: String, onClick: (() -> Unit)? = null) 
     }
 }
 
-@Preview(
-    showBackground = true,
-    name = "Light Mode"
-)
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
-    showBackground = true,
-    name = "Dark Mode"
-)
+@DisplayPreviews
 @Composable
 fun PreviewCalculatorButton() {
     CalculatorComposeTheme {

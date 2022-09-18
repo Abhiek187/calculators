@@ -1,4 +1,4 @@
-package com.example.calculator
+package com.example.calculator_view
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import org.junit.Assert.*
