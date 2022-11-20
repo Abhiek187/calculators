@@ -5,13 +5,13 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(
     name = "Light Mode",
-    group = "Previews",
+    group = "Displays",
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     showBackground = true
 )
 @Preview(
     name = "Dark Mode",
-    group = "Previews",
+    group = "Displays",
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true
 )
