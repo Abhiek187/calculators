@@ -13,8 +13,8 @@ updates:
     ignore:
       # Ignore updates to the following libraries since they're updated or tied with expo
       - dependency-name: "@babel/core"
+      - dependency-name: "@expo/webpack-config"
       - dependency-name: "@types/react"
-      - dependency-name: "@types/react-native"
       - dependency-name: "expo"
       - dependency-name: "expo-status-bar"
       - dependency-name: "jest-expo"
