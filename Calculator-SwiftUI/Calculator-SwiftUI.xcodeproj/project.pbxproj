@@ -46,6 +46,7 @@
 		25565AAC2656C07A009FE7A4 /* Calculator-SwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Calculator-SwiftUIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25565AB02656C07A009FE7A4 /* CalculatorSwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorSwiftUIUITests.swift; sourceTree = "<group>"; };
 		25565AB22656C07A009FE7A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1CAEEDC2A10A0D30037CAF5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +78,7 @@
 		25565A872656C078009FE7A4 = {
 			isa = PBXGroup;
 			children = (
+				F1CAEEDC2A10A0D30037CAF5 /* .swiftlint.yml */,
 				25565A922656C078009FE7A4 /* Calculator-SwiftUI */,
 				25565AA42656C07A009FE7A4 /* Calculator-SwiftUITests */,
 				25565AAF2656C07A009FE7A4 /* Calculator-SwiftUIUITests */,
@@ -290,7 +292,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
