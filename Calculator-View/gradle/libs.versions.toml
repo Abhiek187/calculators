@@ -1,11 +1,11 @@
 [versions]
-androidGradlePlugin = "8.0.0"
-kotlin = "1.8.10"
-coreKtx = "1.10.0"
+androidGradlePlugin = "8.1.0"
+kotlin = "1.9.0"
+coreKtx = "1.10.1"
 appcompat = "1.6.1"
-material = "1.8.0"
+material = "1.9.0"
 constraintLayout = "2.1.4"
-activityKtx = "1.7.1"
+activityKtx = "1.7.2"
 
 junit = "4.13.2"
 coreTesting = "2.2.0"
