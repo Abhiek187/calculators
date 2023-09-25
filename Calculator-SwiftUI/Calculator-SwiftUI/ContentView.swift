@@ -55,6 +55,7 @@ struct ContentView: View {
     @State var num1 = 0.0
     // swiftlint:disable identifier_name
     @State var op = ""
+    // swiftlint:enable identifier_name
     @State var numStr = "0"
     @State var output = "0"
     internal var didAppear: ((Self) -> Void)? // for unit testing
@@ -435,6 +436,7 @@ struct ContentView: View {
         }
     }
 }
+// swiftlint:enable type_body_length
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

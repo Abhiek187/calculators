@@ -10,6 +10,7 @@ import SwiftUI
 @main
 // swiftlint:disable type_name
 struct Calculator_SwiftUIApp: App {
+    // swiftlint:enable type_name
     var body: some Scene {
         WindowGroup {
             ContentView()

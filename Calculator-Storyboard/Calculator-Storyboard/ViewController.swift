@@ -45,6 +45,7 @@ class ViewController: UIViewController {
     var num1 = 0.0
     // swiftlint:disable identifier_name
     var op = ""
+    // swiftlint:enable identifier_name
     var numStr = "0"
 
     // MARK: Functions and Overrides

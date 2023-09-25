@@ -9,8 +9,6 @@ import ViewInspector // library to handle unit testing in SwiftUI (https://githu
 import XCTest
 @testable import Calculator_SwiftUI
 
-extension ContentView: Inspectable {}
-
 // swiftlint:disable type_body_length
 class CalculatorSwiftUITests: XCTestCase {
     var contentView: ContentView! // system under test
@@ -378,3 +376,4 @@ class CalculatorSwiftUITests: XCTestCase {
         }
     }
 }
+// swiftlint:enable type_body_length
