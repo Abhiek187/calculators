@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       # Get information about this project, parse the JSON using ruby, and save the target name into a file called default
       - name: Set Default Scheme
