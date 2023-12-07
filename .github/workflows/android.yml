@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         dir: ["./Calculator-View", "./Calculator-Compose"]
-        api-level: [28, 30, 32]
+        api-level: [29, 31, 33]
 
     defaults:
       run:
