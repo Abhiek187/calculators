@@ -17,7 +17,7 @@ on:
 jobs:
   build:
     # Build and Test default scheme using any available iPhone simulator
-    runs-on: macos-latest
+    runs-on: macos-14
     
     strategy:
       matrix:
