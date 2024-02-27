@@ -284,3 +284,8 @@ class ViewController: UIViewController {
         }
     }
 }
+
+@available(iOS 17.0, *)
+#Preview("Calculator") {
+    UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+}
