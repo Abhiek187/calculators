@@ -32,15 +32,15 @@ class MainActivity : ComponentActivity() {
                             title = {
                                 Text(text = "Calculator-Compose")
                             },
-                            backgroundColor = MaterialTheme.colors.primary
+                            backgroundColor = MaterialTheme.colors.primary,
+                            windowInsets = WindowInsets.Companion.statusBars
                         )
                     },
                     content = { padding ->
                         // A surface container using the 'background' color from the theme
                         Surface(
                             color = MaterialTheme.colors.background,
-                            modifier = Modifier
-                                .padding(padding)
+                            modifier = Modifier.consumeWindowInsets(padding)
                         ) {
                             Calculator(calculatorViewModel)
                         }
