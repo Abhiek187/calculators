@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react-native";
-import "@testing-library/jest-native";
+import "@testing-library/react-native/extend-expect";
 import React from "react";
 import Calculator from "./Calculator";
 
