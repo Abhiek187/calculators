@@ -48,12 +48,6 @@ class ViewController: UIViewController {
     // swiftlint:enable identifier_name
     var numStr = "0"
 
-    // MARK: Functions and Overrides
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-
     func clearOutput() {
         numStr = "0"
         num1 = 0.0
@@ -287,5 +281,5 @@ class ViewController: UIViewController {
 
 @available(iOS 17.0, *)
 #Preview("Calculator") {
-    UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+    UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() ?? UIViewController()
 }
