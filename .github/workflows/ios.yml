@@ -17,7 +17,7 @@ on:
 jobs:
   build:
     # Build and Test default scheme using any available iPhone simulator
-    runs-on: macos-14
+    runs-on: macos-latest
     
     strategy:
       matrix:
@@ -30,6 +30,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      # Override the default Xcode version if needed
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_16.1.app/Contents/Developer'
       
       # Get information about this project, parse the JSON using ruby, and save the target name into a file called default
       - name: Set Default Scheme
