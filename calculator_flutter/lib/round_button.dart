@@ -11,13 +11,13 @@ class RoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(
+        backgroundColor: WidgetStateProperty.all(
           color,
         ),
-        padding: MaterialStateProperty.all(
+        padding: WidgetStateProperty.all(
           EdgeInsets.all(20),
         ),
-        shape: MaterialStateProperty.all(
+        shape: WidgetStateProperty.all(
           CircleBorder(),
         ),
       ),
