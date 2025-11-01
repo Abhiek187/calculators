@@ -63,7 +63,7 @@ jobs:
       # The test results are shown as a webpage instead of on the command line
       - name: Upload Reports
         if: always() # show reports even if the previous steps fail
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           # Ideally this should indicate whether this is View or Compose, but the job index is the next best thing
           name: reports-${{ matrix.api-level }}-${{ strategy.job-index }}
