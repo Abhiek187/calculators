@@ -20,6 +20,7 @@ updates:
       - dependency-name: "react-dom"
       - dependency-name: "react-native"
       - dependency-name: "react-native-web"
+      - dependency-name: "react-test-renderer"
 
   - package-ecosystem: "github-actions"
     directory: "/"
