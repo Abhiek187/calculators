@@ -1,23 +1,17 @@
-import React from "react";
-import {
-  Platform,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  ViewStyle,
-} from "react-native";
+import { Platform, StatusBar, StyleSheet, ViewStyle } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Calculator from "./src/Calculator";
 
 export default function App() {
-  {
-    /* Avoid the notch on iOS */
-  }
   return (
-    <SafeAreaView style={styles.container}>
-      {/* Top bar on iOS and Android */}
-      <StatusBar />
-      <Calculator />
-    </SafeAreaView>
+    // Avoid the notch on iOS
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        {/* Top bar on iOS and Android */}
+        <StatusBar />
+        <Calculator />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
