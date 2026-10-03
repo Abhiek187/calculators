@@ -45,7 +45,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.kotlin.stdlib)
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)

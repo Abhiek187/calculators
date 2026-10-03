@@ -19,7 +19,7 @@ class CalculatorViewModelTest {
         sut.addNumber('2')
         sut.addNumber('9')
 
-        assertEquals(sut.numStr, "729")
+        assertEquals("729", sut.numStr)
     }
 
     @Test
@@ -29,7 +29,7 @@ class CalculatorViewModelTest {
         sut.addNumber('1')
         sut.addNumber('4')
 
-        assertEquals(sut.numStr, "3.14")
+        assertEquals("3.14", sut.numStr)
     }
 
     @Test
@@ -40,7 +40,7 @@ class CalculatorViewModelTest {
         sut.addNumber('0')
         sut.addDecimal()
 
-        assertEquals(sut.numStr, "8.0")
+        assertEquals("8.0", sut.numStr)
     }
 
     @Test
@@ -49,8 +49,8 @@ class CalculatorViewModelTest {
         sut.addNumber('1')
         sut.addOperator('%')
 
-        assertEquals(sut.num1, 21.0, Math.ulp(1.0))
-        assertEquals(sut.op, '%')
+        assertEquals(21.0, sut.num1, Math.ulp(1.0))
+        assertEquals('%', sut.op)
         assertTrue(sut.numStr.isEmpty())
     }
 
@@ -58,8 +58,8 @@ class CalculatorViewModelTest {
     fun addOperator_Empty() {
         sut.addOperator('+')
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, '+')
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals('+', sut.op)
         assertTrue(sut.numStr.isEmpty())
     }
 
@@ -67,7 +67,7 @@ class CalculatorViewModelTest {
     fun invertNumber_Empty() {
         sut.invertNumber()
 
-        assertEquals(sut.numStr, "-0")
+        assertEquals("-0", sut.numStr)
     }
 
     @Test
@@ -76,7 +76,7 @@ class CalculatorViewModelTest {
         sut.addNumber('4')
         sut.invertNumber()
 
-        assertEquals(sut.numStr, "-54")
+        assertEquals("-54", sut.numStr)
     }
 
     @Test
@@ -86,16 +86,16 @@ class CalculatorViewModelTest {
         sut.addNumber('4')
         sut.invertNumber()
 
-        assertEquals(sut.numStr, "54")
+        assertEquals("54", sut.numStr)
     }
 
     @Test
     fun backspace_Empty() {
         sut.backspace()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar()) // == \u0000 = \0
-        assertEquals(sut.numStr, "0")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op) // == \u0000 = \0
+        assertEquals("0", sut.numStr)
     }
 
     @Test
@@ -103,9 +103,9 @@ class CalculatorViewModelTest {
         sut.addNumber('9')
         sut.backspace()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "0")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("0", sut.numStr)
     }
 
     @Test
@@ -114,9 +114,9 @@ class CalculatorViewModelTest {
         sut.addNumber('8')
         sut.backspace()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "7")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("7", sut.numStr)
     }
 
     @Test
@@ -125,9 +125,9 @@ class CalculatorViewModelTest {
         sut.addOperator('/')
         sut.backspace()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "0.0")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("0.0", sut.numStr)
     }
 
     @Test
@@ -137,9 +137,9 @@ class CalculatorViewModelTest {
         sut.addNumber('8')
         sut.backspace()
 
-        assertEquals(sut.num1, 2.0, Math.ulp(1.0))
-        assertEquals(sut.op, '^')
-        assertEquals(sut.numStr, "0")
+        assertEquals(2.0, sut.num1, Math.ulp(1.0))
+        assertEquals('^', sut.op)
+        assertEquals("0", sut.numStr)
     }
 
     @Test
@@ -149,9 +149,9 @@ class CalculatorViewModelTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.num1, 5.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "5.0")
+        assertEquals(5.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("5.0", sut.numStr)
     }
 
     @Test
@@ -161,9 +161,9 @@ class CalculatorViewModelTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.num1, -1.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "-1.0")
+        assertEquals(-1.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("-1.0", sut.numStr)
     }
 
     @Test
@@ -173,9 +173,9 @@ class CalculatorViewModelTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.num1, 6.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "6.0")
+        assertEquals(6.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("6.0", sut.numStr)
     }
 
     @Test
@@ -186,9 +186,9 @@ class CalculatorViewModelTest {
         sut.evaluate()
         val answer = 2/3.0
 
-        assertEquals(sut.num1, answer, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, answer.toString())
+        assertEquals(2/3.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals(answer.toString(), sut.numStr)
     }
 
     @Test
@@ -198,9 +198,9 @@ class CalculatorViewModelTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.num1, 2.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "2.0")
+        assertEquals(2.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("2.0", sut.numStr)
     }
 
     @Test
@@ -210,18 +210,18 @@ class CalculatorViewModelTest {
         sut.addNumber('3')
         sut.evaluate()
 
-        assertEquals(sut.num1, 8.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "8.0")
+        assertEquals(8.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("8.0", sut.numStr)
     }
 
     @Test
     fun evaluate_MissingFirstNum() {
         sut.evaluate()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "0.0")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("0.0", sut.numStr)
     }
 
     @Test
@@ -229,9 +229,9 @@ class CalculatorViewModelTest {
         sut.addNumber('2')
         sut.evaluate()
 
-        assertEquals(sut.num1, 2.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "2.0")
+        assertEquals(2.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("2.0", sut.numStr)
     }
 
     @Test
@@ -240,8 +240,8 @@ class CalculatorViewModelTest {
         sut.addOperator('^')
         sut.evaluate()
 
-        assertEquals(sut.num1, 2.0, Math.ulp(1.0))
-        assertEquals(sut.op, '^')
+        assertEquals(2.0, sut.num1, Math.ulp(1.0))
+        assertEquals('^', sut.op)
         assertTrue(sut.numStr.isEmpty())
     }
 
@@ -249,9 +249,9 @@ class CalculatorViewModelTest {
     fun clearOutput_Empty() {
         sut.clearOutput()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "0")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("0", sut.numStr)
     }
 
     @Test
@@ -259,9 +259,9 @@ class CalculatorViewModelTest {
         sut.addNumber('6')
         sut.clearOutput()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "0")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("0", sut.numStr)
     }
 
     @Test
@@ -270,9 +270,9 @@ class CalculatorViewModelTest {
         sut.addOperator('/')
         sut.clearOutput()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "0")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("0", sut.numStr)
     }
 
     @Test
@@ -282,9 +282,9 @@ class CalculatorViewModelTest {
         sut.addNumber('6')
         sut.clearOutput()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "0")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("0", sut.numStr)
     }
 
     @Test
@@ -295,8 +295,8 @@ class CalculatorViewModelTest {
         sut.evaluate()
         sut.clearOutput()
 
-        assertEquals(sut.num1, 0.0, Math.ulp(1.0))
-        assertEquals(sut.op, 0.toChar())
-        assertEquals(sut.numStr, "0")
+        assertEquals(0.0, sut.num1, Math.ulp(1.0))
+        assertEquals(0.toChar(), sut.op)
+        assertEquals("0", sut.numStr)
     }
 }
