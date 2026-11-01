@@ -1,5 +1,4 @@
 import { render, screen, fireEvent } from "@testing-library/react-native";
-import React from "react";
 import Calculator from "./Calculator";
 
 describe("Calculator", () => {

@@ -30,7 +30,7 @@ const RoundButton: React.FC<RoundButtonProps> = ({ text, color, onPress }) => {
   );
 };
 
-const styles: StyleSheet.NamedStyles<any> = StyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     //cursor: "pointer",
     borderRadius: 100,

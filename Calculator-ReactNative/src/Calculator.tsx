@@ -173,7 +173,7 @@ const Calculator: React.FC = () => {
   );
 };
 
-const styles: StyleSheet.NamedStyles<any> = StyleSheet.create({
+const styles = StyleSheet.create({
   containerVertical: {
     display: "flex",
     justifyContent: "space-around",
